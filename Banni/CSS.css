@@ -1,0 +1,57 @@
+.BJwrapperOfMainBody
+{
+    border-bottom:solid;
+    border-width:1px;
+    width:1200px;
+    height:600px;
+    margin-left:7%;
+    min-width:1200px;
+    background-color: white;
+}
+.BJleftNavBar /*Left Navbar Main container*/
+{
+    height:300px;
+    width:200px;
+    float:left;
+    margin-top: 110px;
+}
+.BJleftCollapseButton /*Left Nav bar Buttons*/
+{
+    width:150px;
+    height:50px;
+    color:#5bc0de;
+    background-color:#456;
+    font-family: 'Oleo Script',sans-serif;
+    font-size: 1.3em;
+    border-radius:5px;
+    cursor:pointer;
+    padding:15px;
+    border-width:1px;
+    border-color:#456;
+    border:inset;
+}
+.BJleftCollapseButtonSubButton /*Sub Buttons of Nav Bar Buttons*/
+{
+    width:140px;
+    margin-left:10px;
+    padding-left:5px;
+}
+.BJleftNavBarLinks /*Links to other pages*/
+{
+    width:130px;
+    height:30px;
+    background-color:#333;
+    color:#d0e9c6;
+    margin-top:2px;
+    border-radius:3px;
+    padding-left:4px;
+}
+.BJmainContainer
+{
+    float:left;
+    margin-left: 150px;
+    padding:5px;
+    margin-top:120px;
+    border-radius: 5px;
+    border:outset;
+}
