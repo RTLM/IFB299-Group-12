@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BDC</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href ="homeStyle.css" rel="stylesheet">
+    <link href ="CSS.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=FONTNAME" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -14,18 +14,16 @@
   </head>
   <body style='background-color:ghostwhite;'>
     <div class='BJwrapperOfMainBody'>
-      <!--Tried to keep Nav bar simple.-->
-      <div class="navbar navbar-inverse">
-          <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href=""><span style="color:#f5e79e">Best Courier Delivery</span></a>
-            </div>   
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="">Customer</a></li>
-                <li><a href="">Staff</a></li>
-            </ul>
-          </div>
-      </div>
+        <div class ='BJheader'>
+            <div class='BJheaderFirstElement'>
+                <div id = "websiteLogo">On The Spot</div>
+            </div>
+            <div class="BJheaderHomeButton">
+                <div id ="homeButton">
+                    Home
+                </div>
+            </div>    
+        </div>
       <!--End of Nav Bar-->
         <!--Start of Left Nav Bar-->
         <?php
@@ -46,6 +44,8 @@
             <a href="" class="btn btn-primary"style="margin: 2px;">Know More</a>
           </div>
         </div>
+      </div>
+      <div class='footer'>
       </div>
      </body>
 </html>
