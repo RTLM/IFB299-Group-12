@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'connect.php';
         if(isset($_POST["emailId"]) ||isset($_POST["destination"]) || isset($_POST["pickup"]) || isset($_POST["receiversName"]) || isset($_POST["receiversContact"])){
 	$email = htmlspecialchars($_POST["email"]);
@@ -21,24 +22,61 @@
 		$errorMessage = $errorMessage."Invalid email format.<br>"; 
         }
 	if(!$error){
-            $mysqlst = $conn->prepare("Insert into orders(emailId,destination,pickUp,recieversContact,receiversName,`status`) values('$email','$destination','$pickup','$receiversContact','$receiversName','Pending');");
-            $mysqlst->execute();
+            
+            $checkIfUserExist = $conn->prepare("select * from customers where emailId = '$email';");
+            $checkIfUserExist->execute();
+            if($checkIfUserExist->rowCount() == 1){
+                $mysqlst = $conn->prepare("Insert into orders(emailId,destination,pickUp,recieversContact,receiversName,`status`) values('$email','$destination','$pickup','$receiversContact','$receiversName','Pending');");
+                $mysqlst->execute();
+                $orderNumber = $conn->prepare("select * from orders where emailId = '$email'");
+                $orderNumber->execute();
+                $lastRow = false;
+                $orderId;
+                while($lastRow == false){
+                    if(($orderIdTemp = $orderNumber->fetch(PDO::FETCH_ASSOC))){
+                        $orderId = $orderIdTemp["orderNumber"];
+                       $lastRow = false; 
+                    }
+                    else{
+                        $lastRow = true;  
+                    }
+                }
+                $_SESSION["currentOrder"]=$orderId;
+                header("Location:http://localhost/PHP/test.php");
+            }
+            else{
+                $error = true;
+                $errorMessage = "User Doesnt exist";
+                echo $errorMessage;
+            }
 	}
-        else{
-            echo $errorMessage;
-        }
 }
 ?>
 <html>
+    <?php
+    include'head.php';
+    ?>
     <body>
-        <form name ="orders" method="post" action =<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>>
-            <input name="email" type ="text">email<br>
-            <input name="destination" type="text">destination<br>
-            <input name="pickup"type =" text">pickup<br>
-            <input name="receiversContact"type="text">recievers contact <br>
-            <input name="receiversName"type="text"> receivers name <br>
-            <input type="submit" action="submit">
-        </form>
+        <div class="HPwrapperOfMainBody">
+            <?php
+            include'header.php';
+            ?>
+            <div class="OPformWrapper">
+                <form name ="orders" method="post" action =<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>>
+                    <input class="OPinput" name="email" type ="text"placeholder="Email">
+                    <input class="OPinput" name="destination" type="text"placeholder="Destination">
+                    <input class="OPinput" name="pickup"type =" text"placeholder="Pickup">
+                    <input class="OPinput" name="receiversContact"type="text"placeholder="Recivers Contact Number">
+                    <input class="OPinput" name="receiversName"type="text" placeholder="Receivers Name">
+                    <input class="OPinput" type="submit" action="submit">
+                </form>
+            </div>    
+        </div>
+        <div class="HPfooter">
+            <?php
+            include'footerElements.php';
+            ?>
+        </div>
     </body>
 </html>
 

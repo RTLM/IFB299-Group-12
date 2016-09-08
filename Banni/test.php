@@ -1,3 +1,8 @@
+<?php
+session_start();
+echo "your order Number is ";
+echo $_SESSION["currentOrder"];
+?>
 <html>
     <head>
         <meta charset="utf-8">
