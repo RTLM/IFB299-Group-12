@@ -1,0 +1,204 @@
+.HPwrapperOfMainBody
+{
+    border:outset;
+    border-bottom:solid;
+    border-width:1px;
+    width:1200px;
+    height:700px;
+    margin-left:7%;
+    min-width:1200px;
+    background-color:gray;
+}
+.HPmainContainer
+{
+    background-color:gainsboro;
+    float:left;
+    margin-left:18%;
+    margin-top:3%;
+    height:35%;
+    width:80%;
+    border-radius: 5px;
+    border:outset;
+    border-width:1px;
+}
+.HPmainContainerHeading
+{
+    height:35%;
+    width:30%;
+    margin-left:5%;
+    font-size:5em;
+    font-family:'courgette',cursive;
+    font-weight:lighter;
+}
+.HPmainContainerPara
+{
+    width:90%;
+    margin-left:5%;
+    margin-top:10px;
+    height:30%;
+    font-size:1.5em;
+    font-family:monospace;
+}
+.HPmainContainerButton
+{
+    height:20%;
+    width:15%;
+    margin-left:5%;
+    -webkit-appearance: button;
+    background-color:royalblue;
+    font-family: monospace;
+    font-size:1.5em;
+    color:white;
+    cursor: pointer;
+}
+.HPheader
+{
+    width:100%;
+    margin-top:-10px;
+    height:50px;
+    font-family:cursive;
+    font-weight:bolder;
+    float:left;
+    background-color:gainsboro;
+    display:button;
+    border:solid;
+    border:outset;
+    border-width:1px;
+}
+.HPheaderFirstElement
+{
+    width:15%;
+    float:left;
+    height:100%;
+    font-size:1.7em;
+    font-weight:bolder;
+    font-family: monospace;
+    font-style: normal;
+    font-variant: normal;
+    border:none;
+}
+.HPheaderButton
+{
+    width:10%;
+    float:left;
+    height:100%;
+    font-size:1.2em;
+    font-weight:lighter;
+    font-family: monospace;
+    font-style: normal;
+    font-variant: normal;
+    cursor:pointer;
+}
+.HPheaderFirstButton
+{
+     margin-left:2%;
+     border-left:solid;
+     border-width:1px;
+}
+.HPheaderSecondButton
+{
+    border-left:solid;
+    border-width:1px;
+}
+.HPheaderThirdButton
+{
+    border-left:solid;
+    border-right:solid;
+    border-width:1px;
+}
+#HPfirstButton
+{
+    margin-top: 7%;
+    margin-left:30%;
+}
+#HPsecondButton
+{
+ margin-top:7%;
+ margin-left:30%;
+}
+#HPthirdButton
+{
+ margin-top:7%;
+ margin-left:30%;   
+}
+#HPwebsiteLogo
+{
+    margin-top:3%;
+    font-weight:lighter;
+    margin-left:20px;
+    cursor: pointer;
+}
+.HPfooter
+{
+    background-color: #333;
+    border:outset;
+    border-width:1px;
+    height:200px;
+    width:1200px;
+    margin-left:7%;
+}
+.HPfooterCustomerCol
+{
+    height:90%;
+    border-right:solid;
+    border-width:1px;
+    width:20%;
+    float:left;
+    margin-left:9%;
+    margin-top:2%;
+    color:ghostwhite;
+}
+.HPfooterCustomerColHeading
+{
+    width:50%;
+    height:10%;
+    color:orangered;
+    font-family:sans-serif;
+    font-weight:lighter;
+    font-variant:small-caps;
+    font-size:1.5em;
+    margin-left:10%;
+}
+.HPfooterCustomerColElements
+{
+    width:50%;
+    height:10%;
+    margin-top:5%;
+    font-family:sans-serif;
+    font-weight:lighter;
+    font-variant:small-caps;
+    font-size:1em;
+    margin-left:20%;
+}
+/*--------------------------------End Of Home Page---------------------------------------------*/
+.OPwrapper
+{
+    width:75%;
+    height:100%;
+    margin-left:25%;
+}
+.OPformWrapper
+{
+    width:40%;
+    height:75%;
+    margin-left:28%;
+    margin-top:7%;
+    background-color: gainsboro;
+    border-radius: 10px;
+    padding: 10px;
+}
+.OPinput
+{
+    width: 100%;
+    text-align: center;
+    margin-left:30%;
+    padding: 21px 20px;
+    margin: 15px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit]{
+     background-color: royalblue;
+}
