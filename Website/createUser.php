@@ -1,85 +1,55 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>On The Spot Delivery</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-  </head>
-
-  <body>
-
-	<?php
-	include('navbar.php');
-	?>
-
-	<div class="row top30">
-	<div class="center-block col-md-4 " style="float: none; background-color:#eee">
-	<form method="POST" action="addUser.php">
-	
-	  <div class="form-group">
-		<label for="email">Email Address:</label>
-		<input type="email" class="form-control" id="email" name="email" placeholder="Email">
-	  </div>
-	  <div class="form-group">
-		<label for="contact">Contact Number:</label>
-		<input type="tel" class="form-control" id="contact" name="contact" placeholder="Contact Phone Number">
-	  </div>
-	  <div class="form-group">
-		<label for="address">Address:</label>
-		<input type="text" class="form-control" id="address" name="address" placeholder="Home/Work Address">
-	  </div>
-	  <div class="form-group">
-		<label for="firstname">First Name:</label>
-		<input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
-	  </div>
-	  <div class="form-group">
-		<label for="lastname">Last Name:</label>
-		<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
-	  </div>	  
-	  <button id="submit" name="submit" type="submit" value="Add Customer" class="btn btn-primary">Submit</button>
-	  
-	</form>
-	</div>
-	</div>
-
-    <hr>
-
-      <footer>
-        <p>&copy; 2016 On The Spot, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+<?php
+    include 'connect.php';
+    if(isset($_POST["email"]) ||isset($_POST["address"]) || isset($_POST["firstName"]) || isset($_POST["lastName"]) || isset($_POST["contact"])){
+	$email = htmlspecialchars($_POST["email"]);
+	$firstName = htmlspecialchars($_POST["firstName"]);
+	$lastName = htmlspecialchars($_POST["lastName"]);
+        $address = htmlspecialchars($_POST["address"]);
+        $contact = htmlspecialchars($_POST["contact"]);
+        $customerPassword = htmlspecialchars($_POST["password"]);
+	$error = false;
+	$errorMessage = "";
+	if(strlen($email) == 0 || strlen($firstName) == 0 || strlen($lastName) == 0 || strlen($address) == 0 || strlen($contact) == 0 || strlen($customerPassword) == 0){
+		$error = true;
+		$errorMessage ="* Fields are required.<br>";
+	}
+	if (!preg_match("/^[a-zA-Z ]*$/",$firstName) || !preg_match("/^[a-zA-Z ]*$/",$lastName)) {
+		$error = true;
+		$errorMessage = $errorMessage."Name and Last name fields can only contain aphabets.<br>"; 
+	}
+	if (strlen($email)>0 && (filter_var($email, FILTER_VALIDATE_EMAIL) == false)) {
+		$error = true;
+		$errorMessage = $errorMessage."Invalid email format.<br>"; 
+        }
+	if(!$error){
+            $emailExist = false;
+            $checkEmail = $conn->prepare("select * from customers where emailId = '$email'");
+            $checkEmail->execute();
+            if($checkEmail->rowCount()==0){
+                $createUser = $conn->prepare("insert into customers values('$email','$address','$contact','$firstName','$lastName','$customerPassword')");
+                $createUser->execute();
+            }
+            else{
+                $error = true;
+                $errorMessage = "User Exist";
+            }
+	}
+}
+?>
+<html>
+    <body>
+        <form name="order" action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> method="post">
+            <input type="text" name="email">email<br>
+            <input type="password" name="password">password<br>
+            <input name="contact" type="text">contact<br>
+            <input type="text" name="address">address<br>
+            <input type="text" name="firstName">first Name<br>
+            <input type="text" name="lastName">last Name<br>
+            
+            <input type ="submit" action="submit"><?php if($error){echo $errorMessage;}?>
+        </form>
+    </body>
 </html>
-
 
 
 

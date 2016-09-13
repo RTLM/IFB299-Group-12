@@ -1,79 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>On The Spot Delivery</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-  </head>
-
-  <body>
-
-	<?php
-	include('navbar.php');
-	?>
-
-	<div class="row top30">
-	<div class="center-block col-md-4 " style="float: none; background-color:#eee">
-	<form method="POST" action="addOrder.php">
-	
-	  <div class="form-group">
-		<label for="email">Email Address:</label>
-		<input type="email" class="form-control" id="email" name="email" placeholder="Email">
-	  </div>
-	  <div class="form-group">
-		<label for="destination">Destination:</label>
-		<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To">
-	  </div>
-	  <div class="form-group">
-		<label for="pickup">Pick Up:</label>
-		<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From">
-	  </div>
-	  <div class="form-group">
-		<label for="receiversname">Receiver's Name:</label>
-		<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name">
-	  </div>
-	  <div class="form-group">
-		<label for="receiverscontact">Receiver's Contact Number:</label>
-		<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number">
-	  </div>	  
-	  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-	  
-	</form>
-	</div>
-	</div>
-
-    <hr>
-
-      <footer>
-        <p>&copy; 2016 On The Spot, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+<?php
+    session_start();
+    include 'connect.php';
+        if(isset($_POST["emailId"]) ||isset($_POST["destination"]) || isset($_POST["pickup"]) || isset($_POST["receiversName"]) || isset($_POST["receiversContact"])){
+	$email = htmlspecialchars($_POST["email"]);
+	$firstName = htmlspecialchars($_POST["destination"]);
+	$lastName = htmlspecialchars($_POST["pickup"]);
+        $address = htmlspecialchars($_POST["receiversName"]);
+        $contact = htmlspecialchars($_POST["receiversContact"]);
+	$error = false;
+	$errorMessage = "";
+	if(strlen($email) == 0 || strlen($firstName) == 0 || strlen($lastName) == 0 || strlen($address) == 0 || strlen($contact) == 0 ){
+		$error = true;
+		$errorMessage ="* Fields are required$contact.<br>";
+	}
+	/*if (!preg_match("/^[a-zA-Z ]*$/",$destination) || !preg_match("/^[a-zA-Z ]*$/",$pickup)) {
+		$error = true;
+		$errorMessage = $errorMessage."Name and Last name fields can only contain aphabets.<br>"; 
+	}*/
+	if (strlen($email)>0 && (filter_var($email, FILTER_VALIDATE_EMAIL) == false)) {
+		$error = true;
+		$errorMessage = $errorMessage."Invalid email format.<br>"; 
+        }
+	if(!$error){
+            
+            $checkIfUserExist = $conn->prepare("select * from customers where emailId = '$email';");
+            $checkIfUserExist->execute();
+            if($checkIfUserExist->rowCount() == 1){
+                $mysqlst = $conn->prepare("Insert into orders(emailId,destination,pickUp,recieversContact,receiversName,`status`) values('$email','$firstName','$lastName','$contact','$address','Pending');");
+                $mysqlst->execute();
+                $orderNumber = $conn->prepare("select * from orders where emailId = '$email'");
+                $orderNumber->execute();
+                $lastRow = false;
+                $orderId;
+                while($lastRow == false){
+                    if(($orderIdTemp = $orderNumber->fetch(PDO::FETCH_ASSOC))){
+                        $orderId = $orderIdTemp["orderNumber"];
+                       $lastRow = false; 
+                    }
+                    else{
+                        $lastRow = true;  
+                    }
+                }
+                $_SESSION["currentOrder"]=$orderId;
+            }
+            else{
+                $error = true;
+                $errorMessage = "User Doesnt exist";
+                echo $errorMessage;
+            }
+	}
+}
+?>
+<html>
+    <?php
+    include'head.php';
+    ?>
+    <body>
+        <div class="HPwrapperOfMainBody">
+            <?php
+            include'header.php';
+            ?>
+            <div class="OPformWrapper">
+                <form name ="orders" method="post" action =<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>>
+                    <input class="OPinput" name="email" type ="text"placeholder="Email">
+                    <input class="OPinput" name="destination" type="text"placeholder="Destination">
+                    <input class="OPinput" name="pickup"type =" text"placeholder="Pickup">
+                    <input class="OPinput" name="receiversContact"type="text"placeholder="Recivers Contact Number">
+                    <input class="OPinput" name="receiversName"type="text" placeholder="Receivers Name">
+                    <input class="OPinput" type="submit" action="submit">
+                </form>
+            </div>    
+        </div>
+    </body>
 </html>
+
