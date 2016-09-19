@@ -1,4 +1,0 @@
-<div class='deliveryCard'>
-     
-</div>
-
