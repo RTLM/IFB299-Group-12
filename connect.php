@@ -1,11 +1,11 @@
 <?php
-$url = getenv(mysql://zb6tlk01gqtov2fy:cv6ok6emcaqd28uc@sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zqqzsvykt8d5j90x);
+$url = getenv('mysql://zb6tlk01gqtov2fy:cv6ok6emcaqd28uc@sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zqqzsvykt8d5j90x');
 $dbparts = parse_url($url);
 
-$hostname = $dbparts['host'];
-$username = $dbparts['user'];
-$password = $dbparts['pass'];
-$database = ltrim($dbparts['path'],'/');
+$hostname = "sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+$username = "zb6tlk01gqtov2fy";
+$password = "cv6ok6emcaqd28uc";
+$database = "zqqzsvykt8d5j90x";
 try {
     $conn = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
     // set the PDO error mode to exception
