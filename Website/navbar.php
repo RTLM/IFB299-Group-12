@@ -18,7 +18,7 @@
             <input type="password" placeholder="Password" class="form-control"name="password">
           </div>
           <button type="submit" class="btn btn-success"action="submit">Sign in</button>
-          <a href="createUser.php" class="btn btn-primary" role="button">Create Account</a>
+          <a href="register.php" class="btn btn-primary" role="button">Create Account</a>
         </form>
       </div><!--/.navbar-collapse -->
     </div>
