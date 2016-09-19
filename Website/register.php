@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -26,34 +27,38 @@
   <body>
 
 	<?php
-		include 'selectNav.php';
-    ?>
+	include('navbar.php');
+	?>
 
 	<div class="row top30">
 	<div class="center-block col-md-4 " style="float: none; background-color:#eee">
-	<form method="POST" action="orderConfirmation.php">
+	<form method="POST" action="addUser.php">
 	
 	  <div class="form-group">
 		<label for="email">Email Address:</label>
 		<input type="email" class="form-control" id="email" name="email" placeholder="Email">
 	  </div>
 	  <div class="form-group">
-		<label for="destination">Destination:</label>
-		<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To">
+		<label for="password">Password:</label>
+		<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 	  </div>
 	  <div class="form-group">
-		<label for="pickup">Pick Up:</label>
-		<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From">
+		<label for="contact">Contact Number:</label>
+		<input type="tel" class="form-control" id="contact" name="contact" placeholder="Contact Phone Number">
 	  </div>
 	  <div class="form-group">
-		<label for="receiversname">Receiver's Name:</label>
-		<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name">
+		<label for="address">Address:</label>
+		<input type="text" class="form-control" id="address" name="address" placeholder="Home/Work Address">
 	  </div>
 	  <div class="form-group">
-		<label for="receiverscontact">Receiver's Contact Number:</label>
-		<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number">
+		<label for="firstname">First Name:</label>
+		<input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+	  </div>
+	  <div class="form-group">
+		<label for="lastname">Last Name:</label>
+		<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
 	  </div>	  
-	  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+	  <button id="submit" name="submit" type="submit" value="Add Customer" class="btn btn-primary">Submit</button>
 	  
 	</form>
 	</div>
@@ -77,3 +82,7 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+
+
+
+

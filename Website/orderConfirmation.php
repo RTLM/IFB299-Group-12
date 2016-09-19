@@ -31,33 +31,44 @@
 
 	<div class="row top30">
 	<div class="center-block col-md-4 " style="float: none; background-color:#eee">
-	<form method="POST" action="orderConfirmation.php">
+	<div class="text-center">
+	<h2>Is Your Order Correct?</h2>
+	</div>
+	<form method="POST" action="addOrder.php">
 	
 	  <div class="form-group">
 		<label for="email">Email Address:</label>
-		<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+		<p class="form-control-static"><?php echo $_POST['email']; ?></p>
+		<input type="hidden" value=<?php echo $_POST['email']; ?> name="email" />
 	  </div>
 	  <div class="form-group">
 		<label for="destination">Destination:</label>
-		<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To">
+		<p class="form-control-static"><?php echo $_POST['destination']; ?></p>
+		<input type="hidden" value=<?php echo $_POST['destination']; ?> name="destination" />
 	  </div>
 	  <div class="form-group">
 		<label for="pickup">Pick Up:</label>
-		<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From">
+		<p class="form-control-static"><?php echo $_POST['pickup']; ?></p>
+		<input type="hidden" value=<?php echo $_POST['pickup']; ?> name="pickup" />
 	  </div>
 	  <div class="form-group">
 		<label for="receiversname">Receiver's Name:</label>
-		<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name">
+		<p class="form-control-static"><?php echo $_POST['receiversname']; ?></p>
+		<input type="hidden" value=<?php echo $_POST['receiversname']; ?> name="receiversname" />
 	  </div>
 	  <div class="form-group">
 		<label for="receiverscontact">Receiver's Contact Number:</label>
-		<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number">
+		<p class="form-control-static"><?php echo $_POST['receiverscontact']; ?></p>
+		<input type="hidden" value=<?php echo $_POST['receiverscontact']; ?> name="receiverscontact" />
 	  </div>	  
 	  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+	  <a href="order.php" class="btn btn-danger" role="button">Cancel</a>
 	  
 	</form>
 	</div>
 	</div>
+	
+</div>
 
     <hr>
 

@@ -14,11 +14,15 @@ include 'connect.php';
                 $errorMessage = $errorMessage."Invalid email format.<br>"; 
         }
         if(!$error){
-            $checkIfUserExist = $conn->prepare("select * from customers where emailId = '$email' and password = '$password';");
-            $checkIfUserExist->execute();
-            if($checkIfUserExist->rowCount() == 1){
+            $user = $conn->prepare("select emailId, accountNo, accountType from accounts where emailId = '$email' and password = '$password';");
+            $user->execute();			
+            if($user->rowCount() == 1){
+				$account = $user->fetch(PDO::FETCH_ASSOC);
                 $_SESSION["login"] = true;
-                $_SESSION["emailId"] = $email;
+                $_SESSION["emailId"] = $account["emailId"];
+				$_SESSION["accountNo"] = $account["accountNo"];
+				$_SESSION["accountType"] = $account["accountType"];
+				
                 header("Location:index.php");
             }
             else{

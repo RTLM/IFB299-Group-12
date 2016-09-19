@@ -1,21 +1,12 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
   <?php
-  include 'head.php';
+	include 'head.php';
   ?>
   <body>
 	<?php
-            if($_SESSION['login']==true){
-                include('navbar_active.php');
-            }
-            else{
-                include('navbar.php');
-            }
-            
-	?>
+		include 'selectNav.php';
+    ?>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
@@ -59,7 +50,5 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

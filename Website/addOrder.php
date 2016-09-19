@@ -1,5 +1,9 @@
 <?php
+	session_start();
+	
 	include 'connect.php';
+	global $conn;
+	
 	if(isset($_POST['email'])) {
 
 		$email = $_POST['email'];
@@ -8,13 +12,20 @@
 		$name = $_POST['receiversname'];
 		$pickup = $_POST['pickup'];
 		$status = "Pending";
+		$date = date("Y-m-d");
+		$id = $_SESSION['accountNo'];
 		
-		$sql = "INSERT INTO orders(emailId, destination, pickUp, receiversName, receiversContact, status) VALUES ('$email', '$destination', '$pickup', '$name', '$contact', '$status')";
-
-		if ($conn->query($sql) === TRUE) {
+		try 
+		{
+			$sql = 
+			"INSERT INTO orders(accountNo, destination, pickUp, receiversName, receiversContact, status, orderDate) VALUES ('$id', '$destination', '$pickup', '$name', '$contact', '$status', '$date')";
+			// use exec() because no results are returned
+			$conn->exec($sql);
 			echo "New record created successfully";
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+		catch(PDOException $e)
+		{
+			echo $sql . "<br>" . $e->getMessage();
 		}
 	}
 	header("location:index.php");

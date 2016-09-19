@@ -3,6 +3,11 @@ body {
   padding-top: 50px;
   padding-bottom: 20px;
 }
+@media (max-width: 1200px) {
+  body {
+    padding-top: 100px;
+  }
+}
 
 .top5 { margin-top:5px; }
 .top7 { margin-top:7px; }
@@ -17,4 +22,14 @@ body {
 
   display: flex;
   align-items: center;
+}
+.horizontal-center { margin: auto; max-width: 300px;}
+
+.btn-space {
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.btn-container-right {
+  direction: rtl;
 }

@@ -35,46 +35,68 @@
 	
 	try 
 		{
-			$sql = $conn->prepare("SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = 1;");
+			$sql = $conn->prepare("SELECT orderNo, destination, receiversName, status, pickUp, accountNo, orderDate FROM orders WHERE status != 'Complete';");
 			// use exec() because no results are returned
 			$sql->execute();
+			$result = $sql->fetchAll();
 		}
 	catch(PDOException $e)
 		{
 			echo $sql . "<br>" . $e->getMessage();
 		}
 
-	$result = $sql->fetchAll();
-	print_r($result->num_rows);
+	
 	if (isset($result)) {
 		 // output data of each row
 		foreach($result as $row) {
-		
-		if($_SESSION['accountNo'] == $row['accountNo']) { ?>
+		?>
 
 		<div class="horizontal-center">
-		<div class="row">
-		<div class="col-md-30">
-			<div class="panel-group">
-			  <div class="panel panel-primary">
-			  <div class="panel-heading">Order #<?php echo $row['orderNo']; ?></div>
-			  <div class="panel-body">Sent To: <?php echo $row['receiversName']; ?><br>
-			  Destination: <?php echo $row['destination']; ?><br>
-			  Sent From: <?php echo $row['pickUp']; ?><br>
-			  Status: <?php echo $row['status']; ?><br>
-			  Estimated Delivery: <?php 
-			  $date = new DateTime($row['orderDate']);
-			  date_add($date, date_interval_create_from_date_string('5 weekdays'));
-			  echo $date->format('d/m/Y'); ?></div>
-			  </div>
-			  </div>
-			  </div>
-			  </div>
+			<form action="updateStatus.php" method='POST'>
+				<div class="row">
+				<div class="col-md-30">
+				<div class="panel-group">
+				
+				<?php
+				$now = new DateTime('now');
+				$orderDate = new DateTime($row['orderDate']);
+				date_add($orderDate, date_interval_create_from_date_string('5 weekdays'));		
+				$interval = $now->diff($orderDate);
+				if ($interval->days > 3) {
+				?>				
+				<div class="panel panel-success">
+				<?php 
+				} else if ($interval->days > 1) {
+				?>
+				<div class="panel panel-warning">
+				<?php 
+				} else {
+				?>
+				<div class="panel panel-danger">
+				<?php 
+				}
+				?>						
+				  <div class="panel-heading">Order #<?php echo $row['orderNo']; ?></div>
+				  <div class="panel-body">Pick Up: <?php echo $row['pickUp']; ?><br>
+					  Customer: #<?php echo $row['accountNo']; ?><br>
+					  Deliver To: <?php echo $row['destination']; ?><br>
+					  Receiver: <?php echo $row['receiversName']; ?><br>
+					  Status: <?php echo $row['status']; ?><br>
+					  Deliver By: <?php 
+						echo $orderDate->format('d/m/Y'); ?></div>
+				  <div class="btn-container-right">
+					<button type="submit" name="statusComplete" value=<?php echo $row['orderNo']; ?> class="btn btn-success btn-space">Mark As Complete</button>
+					<a href="#" class="btn btn-info btn-space" name role="button">Order Details</a>					
+					
+				  </div>
+				</div>
+				</div>
+				</div>
+				</div>
+			</form>
+		</div>
 		 <?php }
 		 }
-	} else {
-		 echo "0 results";
-	}
 	
 ?>
 		  <footer>
