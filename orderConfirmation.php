@@ -1,33 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>On The Spot Delivery</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-  </head>
+  <?php
+    include "head.php";
+  ?>
 
   <body>
 
 	<?php
-		include 'selectNav.php';
-    ?>
+            include 'selectNav.php';
+        ?>
 
 	<div class="row top30">
 	<div class="center-block col-md-4 " style="float: none; background-color:#eee">
@@ -38,7 +19,7 @@
 	
 	  <div class="form-group">
 		<label for="email">Email Address:</label>
-		<p class="form-control-static"><?php echo $_POST['email']; ?></p>
+		<p class="form-control-static"><?php echo $_SESSION['emailId']; ?></p>
 		<input type="hidden" value=<?php echo $_POST['email']; ?> name="email" />
 	  </div>
 	  <div class="form-group">

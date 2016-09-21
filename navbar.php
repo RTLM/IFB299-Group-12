@@ -5,7 +5,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li<?php if($_SERVER['PHP_SELF']=="/PHP/index.php"){echo" class='active'";}?>><a href="index.php">Home</a></li>
+                <li<?php if(htmlspecialchars($_SERVER['PHP_SELF'])=="/PHP/index.php"){echo" class='active'";}?>><a href="index.php">Home</a></li>
                 <li><a href="order.php">Order</a></li>
                 <li><a href="history.php">History</a></li>
                 <li><a href="about.php">About</a></li>
