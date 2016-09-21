@@ -11,7 +11,6 @@
         $status = "Pending";
         $date = date("Y-m-d");
         $db = new database;
-		echo "test";
         $db->connectToDatabase();
         $db->updateOrdersTable($accountNo, $destination, $pickup, $receiversName, $receiversContact, $status, $date);
 		header("Location:orderComplete.php");
