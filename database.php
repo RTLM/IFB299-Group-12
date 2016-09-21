@@ -12,7 +12,6 @@ class database{
             $this->conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
             }
         catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
@@ -33,8 +32,10 @@ class database{
             $sql = 
             "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date');";
             // use exec() because no results are returned
-            $this->conn->exec($sql);
-            header("Location:index.php");
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+			$lastOrder = $this->conn->lastInsertId();
+			$_SESSION['lastOrder'] = $lastOrder;			
         }
         catch(PDOException $e){
             echo $e->getMessage();
@@ -64,12 +65,21 @@ class database{
             return false;
         }
     }
+	
     function getArrayOfValues($sqlSt){
         $executeCommand = $this->conn->prepare($sqlSt);
         $executeCommand->execute();
         $fetchData = $executeCommand->fetchAll();
         return $fetchData;
     }
+	
+	function getFetchValue($sqlSt){
+        $executeCommand = $this->conn->prepare($sqlSt);
+        $executeCommand->execute();
+        $fetchData = $executeCommand->fetch();
+        return $fetchData;
+    }
+	
     function checkInputsIfEmpty($input){
         if(strlen($input)==0){
             return true;
