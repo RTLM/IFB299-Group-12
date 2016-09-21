@@ -12,7 +12,7 @@
       <div class="container">
         <h1>Welcome!</h1>
         <p>To On The Spot delivery service. Click the button below to begin your order</p>
-        <p><a class="btn btn-primary btn-lg" href="orderPage.php" role="button">Start Order &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="order.php" role="button">Start Order &raquo;</a></p>
       </div>
     </div>
 

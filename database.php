@@ -4,10 +4,10 @@ class database{
     private $errorInConnection = false;
     /*This function will connect us to database for future updates to datbase.*/
     function connectToDatabase(){
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $database = "ifb299";
+        $servername = "sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+        $username = "zb6tlk01gqtov2fy";
+        $password = "cv6ok6emcaqd28uc";
+        $database = "zqqzsvykt8d5j90x";
         try{
             $this->conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
             // set the PDO error mode to exception
@@ -19,6 +19,14 @@ class database{
             $this->errorInConnection = true;
             }
     }
+    function runASqlQuery($sql){
+        try{
+            $this->conn->exec($sql);
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
     /*This function will update orders table*/
     function updateOrdersTable($accountNo,$destination,$pickup,$receiversName,$receiversContact,$status,$date){
         try{
@@ -26,7 +34,7 @@ class database{
             "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date');";
             // use exec() because no results are returned
             $this->conn->exec($sql);
-            echo "New record created successfully";
+            header("Location:index.php");
         }
         catch(PDOException $e){
             echo $e->getMessage();

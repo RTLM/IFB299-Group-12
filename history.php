@@ -15,7 +15,7 @@
                 foreach($result as $row){?>
                     <div class="horizontal-center">
                         <div class="row">
-                            <div class="col-md-30">
+                            <div class="col-md-30" style="margin-top:50px;">
                                 <div class="panel-group">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
@@ -43,7 +43,7 @@
             }
         ?>
           <footer>
-                  <p><?php echo "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";"?></p>
+                  <p>&copy; 2016 Company, Inc.</p>
           </footer>
         </div> <!-- /container -->
         <!-- Bootstrap core JavaScript

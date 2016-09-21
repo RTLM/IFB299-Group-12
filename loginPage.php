@@ -18,6 +18,7 @@ include 'database.php';
                $_SESSION["emailId"] = $user["emailId"];
                $_SESSION["accountNo"] = $user["accountNo"];
                $_SESSION["accountType"] = $user["accountType"];
+               header("Location:index.php");
            }
         } 
 }

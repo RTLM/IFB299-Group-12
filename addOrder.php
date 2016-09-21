@@ -14,5 +14,4 @@
         $db = new database;
         $db->connectToDatabase();
         $db->updateOrdersTable($accountNo,$destination, $pickup, $receiversName, $receiversContact, $status,$date);    
-    }
-    
+    }  
