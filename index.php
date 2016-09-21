@@ -37,11 +37,10 @@
       </div>
 
       <hr>
+	</div> <!-- /container -->
+     
 
-      <footer>
-        <p>&copy; 2016 Company, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
+
 
 
     <!-- Bootstrap core JavaScript
