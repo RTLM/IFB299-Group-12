@@ -10,8 +10,8 @@
         $pickup = htmlspecialchars($_POST['pickup']);
         $status = "Pending";
         $date = date("Y-m-d");
-        $id = $_SESSION['accountNo'];
         $db = new database;
         $db->connectToDatabase();
-        $db->updateOrdersTable($accountNo,$destination, $pickup, $receiversName, $receiversContact, $status,$date);    
+        $db->updateOrdersTable($accountNo, $destination, $pickup, $receiversName, $receiversContact, $status, $date);
+		header("Location:orderComplete.php");
     }  
