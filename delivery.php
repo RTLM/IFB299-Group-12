@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if($_SESSION["login"]==true && $_SESSION["accountType"]=="Admin"){
+    }
+    else{
+        header("Location:index.php");
+    }
+?>
 <!DOCTYPE html>
 <html>
     <?php
@@ -23,7 +31,7 @@
                                             Order #<?php echo $row['orderNo']; ?>
                                         </div>
                                         <div class="panel-body"> 
-											Pick-Up From: <?php echo $row['pickUp']; ?><br>
+                                            Pick-Up From: <?php echo $row['pickUp']; ?><br>
                                             Destination: <?php echo $row['destination']; ?><br>                                            
                                             Status: <?php echo $row['status']; ?><br>
                                             Estimated Delivery: <?php 

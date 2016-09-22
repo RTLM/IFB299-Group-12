@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if($_SESSION["login"] == true){
+        header("Location:index.php");
+        exit;
+    }
     include 'database.php';
     if(isset($_POST['email'])) {
         $emailId = htmlspecialchars($_POST['email']);
