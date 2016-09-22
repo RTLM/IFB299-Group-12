@@ -1,21 +1,22 @@
 <?php
 class database{
     private $conn;
-    private $errorInConnection = false;
     /*This function will connect us to database for future updates to datbase.*/
     function connectToDatabase(){
-        $servername = "sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+        $serverName = "sp6xl8zoyvbumaa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
         $username = "zb6tlk01gqtov2fy";
         $password = "cv6ok6emcaqd28uc";
         $database = "zqqzsvykt8d5j90x";
         try{
-            $this->conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+            $this->conn = new PDO("mysql:host=$serverName;dbname=$database", $username, $password);
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return true;
+
             }
         catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
-            $this->errorInConnection = true;
+            return false;
             }
     }
     function runASqlQuery($sql){
@@ -27,34 +28,33 @@ class database{
         }
     }
     /*This function will update orders table*/
-    function updateOrdersTable($accountNo,$destination,$pickup,$receiversName,$receiversContact,$status,$date){
+    function makeOrder($sql){
         try{
-            $sql = 
-            "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date');";
-            // use exec() because no results are returned
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-			$lastOrder = $this->conn->lastInsertId();
-			$_SESSION['lastOrder'] = $lastOrder;			
+            $this->conn->exec($sql);
+            return true;
         }
         catch(PDOException $e){
-            echo $e->getMessage();
+            return $e;
         }
     }
     /*This fucntion will update customers table*/
-    function updateCustomersTable($emailId,$address,$contactNumber,$firstName,$lastName,$password){
+    function makeAccount($emailId,$address,$contactNumber,$firstName,$lastName,$password,$accountType){
+        if($this->checkIfEmailIdUsed($emailId)){
+            return false;
+        }
         try{
                 $sql = 
-                "insert into customers value('$emailId','$address','$contactNumber','$firstName','$lastName','$password');";
-                // use exec() because no results are returned
+                "INSERT INTO accounts(emailId, password, accountType) VALUES ('$emailId', '$password', '$accountType');
+                INSERT INTO customers(accountNo, address, contactNo, firstName, lastName) VALUES (LAST_INSERT_ID(), '$address', '$contactNumber', '$firstName', '$lastName');
+                ";
                 $this->conn->exec($sql);
-                echo "New record created successfully";
+                return true;
         }
         catch(PDOException $e){
-                echo $e->getMessage();
+                header("Location:error.php");
         }
     }
-    function checkIfUserExist($userName,$password){
+    function checkCredentials($userName,$password){
         $user = $this->conn->prepare("select emailId, accountNo, accountType from accounts where emailId = '$userName' and password = '$password';");
         $user->execute();
         if($user->rowCount()==1){
@@ -65,21 +65,22 @@ class database{
             return false;
         }
     }
-	
+    function checkIfEmailIdUsed($email){
+        $user = $this->conn->prepare("select emailId, accountNo, accountType from accounts where emailId = '$email';");
+        $user->execute();
+        if($user->rowCount()==1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function getArrayOfValues($sqlSt){
         $executeCommand = $this->conn->prepare($sqlSt);
         $executeCommand->execute();
-        $fetchData = $executeCommand->fetchAll();
+        $fetchData = $executeCommand->fetchAll(PDO::FETCH_ASSOC);
         return $fetchData;
     }
-	
-	function getFetchValue($sqlSt){
-        $executeCommand = $this->conn->prepare($sqlSt);
-        $executeCommand->execute();
-        $fetchData = $executeCommand->fetch();
-        return $fetchData;
-    }
-	
     function checkInputsIfEmpty($input){
         if(strlen($input)==0){
             return true;
