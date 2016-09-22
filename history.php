@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if($_SESSION["login"]!=true){
+        header("Location:signin.php");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html>
     <?php
