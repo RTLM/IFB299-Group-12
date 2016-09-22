@@ -10,7 +10,7 @@
             include 'PHPfunctions.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";";
+            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate FROM orders WHERE status = 'Pending';";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 foreach($result as $row){?>
@@ -22,10 +22,9 @@
                                         <div class="panel-heading">
                                             Order #<?php echo $row['orderNo']; ?>
                                         </div>
-                                        <div class="panel-body">
-                                            Sent To: <?php echo $row['receiversName']; ?><br>
-                                            Destination: <?php echo $row['destination']; ?><br>
-                                            Sent From: <?php echo $row['pickUp']; ?><br>
+                                        <div class="panel-body"> 
+											Pick-Up From: <?php echo $row['pickUp']; ?><br>
+                                            Destination: <?php echo $row['destination']; ?><br>                                            
                                             Status: <?php echo $row['status']; ?><br>
                                             Estimated Delivery: <?php 
                                             $date = new DateTime($row['orderDate']);
@@ -35,7 +34,7 @@
                                         <form action = "markComplete.php" method="post" name="statusMarker">
                                             <div class="btn-container-right">
                                                 <button type="submit" name="statusComplete" value=<?php echo $row['orderNo']; ?> class="btn btn-success btn-space">Mark As Complete</button>
-                                                <a href="#" class="btn btn-info btn-space" name role="button">Order Details</a>					
+                                                <a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>					
                                             </div>
                                         </form>
                                     </div>
