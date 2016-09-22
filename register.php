@@ -20,7 +20,16 @@
           global $error;
           $error = true;
         }
-        
+        else{
+            //Log in the user..
+            $userDetails = $db->checkCredentials($emailId, $password);
+            $_SESSION["login"] = true;
+            $_SESSION["emailId"] = $userDetails["emailId"];
+            $_SESSION["accountNo"] = $userDetails["accountNo"];
+            $_SESSION["accountType"] = $userDetails["accountType"];
+            header("Location:index.php");
+            exit;
+        }      
 }//end if
 ?>
 <!DOCTYPE html>
