@@ -11,3 +11,21 @@ function statusOfDeliveryForDriver($orderDate,$status){
         return "success";
     }
 }
+function changeHomePageAccordingUserStatus($loggedIn){
+    if($loggedIn){
+        echo '<p>To On The Spot delivery service. Click the button below to begin your order</p>'
+        . '<p><a class="btn btn-primary btn-lg" href="order.php" role="button">Start Order &raquo;</a></p>';
+    }
+    else{
+        echo '<p>To On The Spot delivery service. Login to make an order</p>'
+        . '<p><a class="btn btn-primary btn-lg" href="signin.php" role="button">Login.... &raquo;</a></p>'
+        . 'OR'
+        . '<p><a class="btn btn-primary btn-lg" href="register.php" role="button">Register &raquo;</a></p>';
+    }
+}
+function alertUser($variable,$stringToDisplay){
+    if($variable){
+        echo '<label style="color:red;">'.$stringToDisplay.'</label>';
+        return true;
+    }   
+}

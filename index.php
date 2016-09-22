@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include 'PHPfunctions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <?php
@@ -5,14 +9,15 @@
   ?>
   <body>
 	<?php
-		include 'selectNav.php';
-    ?>
+            include 'selectNav.php';
+        ?>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
         <h1>Welcome!</h1>
-        <p>To On The Spot delivery service. Click the button below to begin your order</p>
-        <p><a class="btn btn-primary btn-lg" href="order.php" role="button">Start Order &raquo;</a></p>
+        <?php
+            changeHomePageAccordingUserStatus($_SESSION["login"]); 
+        ?>
       </div>
     </div>
 
@@ -35,19 +40,8 @@
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
       </div>
-
-      <hr>
-	</div> <!-- /container -->
-     
-
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+      <?php
+        include "tail.php";
+      ?>
   </body>
 </html>

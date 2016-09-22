@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    unset($_SESSION["orderSQL"]);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <?php
@@ -5,14 +9,14 @@
   ?>
 
   <body>
-
 	<?php
             include 'selectNav.php';
             include 'database.php';			
-			$db = new database;
+            $db = new database;
             $db->connectToDatabase();
-			$sql = ("SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE orderNo = ".$_SESSION["lastOrder"].";");
-			$result = $db->getFetchValue($sql);
+            $sql = ("SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";");
+            $getResult = $db->getArrayOfValues($sql);
+            $result = $getResult[count($getResult)-1];
         ?>
 
 	<div class="row top30">
@@ -22,30 +26,9 @@
 	</div>
 	<div class="text-center">
 	<p>
-		Sent To: <?php echo $result['receiversName']; ?><br>
-		Destination: <?php echo $result['destination']; ?><br>
-		Sent From: <?php echo $result['pickUp']; ?><br>
-		Status: <?php echo $result['status']; ?><br>
-		Estimated Delivery: <?php 
-		$date = new DateTime($result['orderDate']);
-		date_add($date, date_interval_create_from_date_string('5 weekdays'));
-		echo $date->format('d/m/Y'); ?>
+		Your order has been completed. You can track it in history.
 	</p>
-	<p><a class="btn btn-success" href="index.php" role="button">Done</a></p>
+	<p><a class="btn btn-success" href="history.php" role="button">Done</a></p>
 	</div>
-	</div>
-	
+	</div>	
 </div>
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>

@@ -1,32 +1,14 @@
 <?php
-	include 'connect.php';
-	global $conn;
-	
+	include 'database.php';
 	if(isset($_POST['email'])) {
-
-		$email = $_POST['email'];
-		$contact = $_POST['contact'];
-		$address = $_POST['address'];
-		$firstname = $_POST['firstname'];
-		$lastname = $_POST['lastname'];
-		$password = $_POST['password'];
-		$accountType = 'Customer';		
-
-		try {
-			$addAccount = 
-			"
-			INSERT INTO accounts(emailId, password, accountType) VALUES ('$email', '$password', '$accountType');
-			INSERT INTO customers(accountNo, address, contactNo, firstName, lastName) VALUES (LAST_INSERT_ID(), '$address', '$contact', '$firstname', '$lastname');
-			";
-			// use exec() because no results are returned
-			$conn->exec($addAccount);
-			echo "New record created successfully";
-			}
-		catch(PDOException $e)
-			{
-			echo $addAccount . "<br>" . $e->getMessage();
-			}		
-	}
-	header("location:index.php");
-	exit;
-?>
+		$emailId = htmlspecialchars($_POST['email']);
+		$contact = htmlspecialchars($_POST['contact']);
+		$address = htmlspecialchars($_POST['address']);
+		$firstName = htmlspecialchars($_POST['firstname']);
+		$lastName = htmlspecialchars($_POST['lastname']);
+		$password = htmlspecialchars($_POST['password']);
+		$accountType = 'Customer';
+                $db = new database;
+                $db->connectToDatabase();
+                $db->makeAccount($emailId, $address, $contactNumber, $firstName, $lastName, $password, $accountType);
+}//end if
