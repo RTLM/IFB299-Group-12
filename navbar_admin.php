@@ -6,6 +6,7 @@
         <div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
               <li><a href="delivery.php">Deliveries</a></li>
+			  <li><a href="records.php">Records</a></li>
             </ul>
 			<form class="navbar-form navbar-right">
 				<div class="dropdown">
