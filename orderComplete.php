@@ -37,12 +37,6 @@
 	
 </div>
 
-    <hr>
-
-      <footer>
-        <p>&copy; 2016 On The Spot, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
