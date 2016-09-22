@@ -18,8 +18,8 @@ function changeHomePageAccordingUserStatus($loggedIn){
     }
     else{
         echo '<p>To On The Spot delivery service. Login to make an order</p>'
-        . '<p><a class="btn btn-primary btn-lg" href="signin.php" role="button">Login.... &raquo;</a></p>'
-        . 'OR'
+        . '<p><a class="btn btn-primary btn-lg" href="signin.php" role="button">Login &raquo;</a></p>'
+        . '<p>Or </p>'
         . '<p><a class="btn btn-primary btn-lg" href="register.php" role="button">Register &raquo;</a></p>';
     }
 }
