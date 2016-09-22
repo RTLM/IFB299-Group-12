@@ -11,4 +11,5 @@
 	else{
 		include('navbar.php');
 	}
-		
+	include('footer.php');
+?>
