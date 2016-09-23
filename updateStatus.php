@@ -8,3 +8,4 @@
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 	header("location:delivery.php");
+	?>

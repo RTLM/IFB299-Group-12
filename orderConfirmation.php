@@ -52,7 +52,7 @@
                   </div>	  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                   <a href="order.php" class="btn btn-primary" role="button">Add Order</a>
-                  <a href="order.php" class="btn btn-danger" role="button">Cancel</a>
+                  <a href="cancelOrder.php" class="btn btn-danger" role="button">Cancel</a>
                 </form>
             </div>
 	</div>
