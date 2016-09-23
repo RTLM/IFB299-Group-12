@@ -49,6 +49,7 @@
                                 </div>
                             </div>
                         </div>
+					</div>
                  <?php 
                 }//end forEach
             }

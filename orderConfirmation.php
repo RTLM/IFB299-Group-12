@@ -58,8 +58,6 @@
                 </form>
             </div>
 	</div>
-	
-</div>
     <?php
         include "tail.php";
     ?>
