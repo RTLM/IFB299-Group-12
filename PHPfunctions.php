@@ -29,3 +29,11 @@ function alertUser($variable,$stringToDisplay){
         return true;
     }   
 }
+
+function updateNav($items) {
+	$active = "class=\"active\"";
+	foreach($items as $item) {
+		$html .= "<li " . ($_SERVER['PHP_SELF']==$item['url'] ? $active : ''). "><a href='{$item['url']}'>{$item['text']}</a></li>\n";
+	}
+	return $html;
+}

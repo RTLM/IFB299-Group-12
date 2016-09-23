@@ -8,18 +8,15 @@
     ?>
     <body>
         <?php
-            include 'selectNav.php';
+            include 'navbar.php';
             include 'database.php';			
             $db = new database;
             $db->connectToDatabase();
             $sql = ("SELECT orderNo, size, weight, destination, receiversName, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName FROM orders join customers WHERE orderNo =" .$_GET['order'].";");
             $result = $db->getArrayOfValues($sql);
         ?>
-	<div class="row top30">
-            <div class="center-block col-md-4 " style="float: none; background-color:#eee">
-                <div class="text-center">
-                    <h2>Order # <?php echo $result[0]['orderNo']; ?> </h2>
-                </div>
+         <h2 class="text-center">Order # <?php echo $result[0]['orderNo']; ?> </h2>    
+			<div class="col-md-6 col-md-offset-3" style="float: none; background-color:#eee">
                 <div class="text-center">
                     <p>
                         <b>Sending From:</b> <?php echo $result[0]['pickUp']; ?><br>
@@ -43,7 +40,6 @@
                     </p>
                 </div>
             </div>	
-        </div>
 
         <!-- Modal -->
         <div id="weightSizeModal" class="modal fade" role="dialog">

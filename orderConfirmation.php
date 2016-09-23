@@ -19,13 +19,11 @@
     ?>
   <body>
 	<?php
-            include 'selectNav.php';
+            include 'navbar.php';
         ?>
-	<div class="row top30">
-            <div class="center-block col-md-4 " style="float: none; background-color:#eee">
-                <div class="text-center">
-                <h2>Is Your Order Correct?</h2>
-                </div>
+		<h2 class="text-center">Is Your Order Correct?</h2>
+            <div class="col-md-6 col-md-offset-3" style="float: none; background-color:#eee">
+    
                 <form method="POST" action="addOrder.php">
                   <div class="form-group">
                         <label for="email">Email Address:</label>

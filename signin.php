@@ -5,7 +5,7 @@
   ?>
   <body>
     <?php
-        include 'selectNav.php';
+        include 'navbar.php';
     ?>
     <div class="container"style="width:30%;">
       <form class="form-signin" name="loginForm" action="loginPage.php" method="post"style="margin-top:40%;">

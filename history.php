@@ -11,11 +11,13 @@
         include "head.php"
     ?>
     <body>
+	<?php
+        include 'navbar.php';
+	?>
         
     <div class="horizontal-center">
 	<h2 class="text-center">Order History</h2>
 		<?php
-            include 'selectNav.php';
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
