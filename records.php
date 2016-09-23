@@ -13,9 +13,8 @@
     ?>
     <body>
         <?php
-            include 'selectNav.php';
+            include 'navbar.php';
             include 'database.php';
-            include 'PHPfunctions.php';
             $db = new database;
             $db->connectToDatabase();
             $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate FROM orders;";

@@ -5,7 +5,7 @@
     ?>
     <body>
 	<?php
-            include 'selectNav.php';
+            include 'navbar.php';
         ?>
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">

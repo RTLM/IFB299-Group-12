@@ -9,12 +9,12 @@
   ?>
     <body>
         <?php
-            include 'selectNav.php';
+            include 'navbar.php';
         ?>
 			<div class="container">
 			<h2 class="text-center">New Order</h2>
 				<div class="col-md-8 col-md-offset-2" style="background-color:#eee">
-					<form method="POST" action="orderConfirmation.php" onsubmit="alert('jheiuhu');">
+					<form method="POST" action="orderConfirmation.php">
 					 <div class="form-group">
 							<label for="destination">Destination:</label>
 							<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To">
