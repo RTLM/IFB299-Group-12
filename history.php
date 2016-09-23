@@ -11,7 +11,10 @@
         include "head.php"
     ?>
     <body>
-        <?php
+        
+    <div class="horizontal-center">
+	<h2 class="text-center">Order History</h2>
+		<?php
             include 'selectNav.php';
             include 'database.php';
             $db = new database;
@@ -20,9 +23,8 @@
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 foreach($result as $row){?>
-                    <div class="horizontal-center">
                         <div class="row">
-                            <div class="col-md-30" style="margin-top:50px;">
+                            <div class="col-md-30">
                                 <div class="panel-group">
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
@@ -49,6 +51,7 @@
                 echo "0 results";
             }
         ?>
+		</div>
         <?php 
             include "tail.php";
         ?>

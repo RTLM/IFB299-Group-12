@@ -42,8 +42,9 @@
 	<?php
 	include('navbar.php');
 	?>
-	<div class="row top30">
-            <div class="center-block col-md-4 " style="float: none; background-color:#eee">
+	<div class="container">
+	<h2 class="text-center">Register Account</h2>
+            <div class="col-md-8 col-md-offset-2" style="float: none; background-color:#eee">
                 <form method="POST" action="register.php">
                     <?php if($error){echo"<label style='color:red'>Email Address Used!!!</label>";}?>
                     <div class="form-group">

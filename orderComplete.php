@@ -20,15 +20,18 @@
         ?>
 
 	<div class="row top30">
-	<div class="center-block col-md-4 " style="float: none; background-color:#eee">
-	<div class="text-center">
-	<h2>Thank you for your order!</h2>
+		<div class="center-block col-md-4 " style="float: none; background-color:#eee">
+			<div class="text-center">
+				<h2>Thank you for your order!</h2>
+			</div>
+			<div class="text-center">
+				<p>Your order has been completed. You can track it in history.</p>
+				<p><a class="btn btn-success" href="history.php" role="button">Done</a></p>
+			</div>
+		</div>	
 	</div>
-	<div class="text-center">
-	<p>
-		Your order has been completed. You can track it in history.
-	</p>
-	<p><a class="btn btn-success" href="history.php" role="button">Done</a></p>
-	</div>
-	</div>	
-</div>
+	<?php
+        include "tail.php";
+    ?>
+  </body>
+</html>

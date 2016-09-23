@@ -1,4 +1,4 @@
-</div> <!-- /container -->
+<!-- /container -->
 <?php
     include "footer.php";
 ?>
