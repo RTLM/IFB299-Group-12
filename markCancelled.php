@@ -6,7 +6,7 @@ if(isset($_POST["statusCancel"])){
     $orderNumber = htmlspecialchars($_POST["statusCancel"]);
     $sql = "UPDATE `orders` SET `status`='Cancelled' WHERE `orderNo`='$orderNumber';";
     if($db->runASqlQuery($sql)){
-        header("Location:delivery.php");
+        header("Location:history.php");
     }
     else{
         header("Location:error.php");

@@ -11,7 +11,6 @@
       <form class="form-signin" name="loginForm" action="loginPage.php" method="post"style="margin-top:40%;">
         <h2 class="form-signin-heading">Please Sign In</h2>
         <?php 
-        include 'PHPfunctions.php';
             if(alertUser($_SESSION["error"],$_SESSION["errorMessage"])){unset($_SESSION["error"]);unset($_SESSION["errorMessage"]);}
         ?>
         <input type="email" name="email" class="form-control" placeholder="Email Address" required autofocus style="margin-bottom:10px;">
