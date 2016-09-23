@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if($_SESSION["login"]==true && $_SESSION["accountType"]=="Admin"){
+    if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner" || $_SESSION["accountType"]=="Driver")){
     }
     else{
         header("Location:index.php");
@@ -17,10 +17,10 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate FROM orders WHERE status = 'Pending';";
+            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate FROM orders WHERE status NOT IN ('Complete', 'Cancelled') ;";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
-                foreach($result as $row){?>
+                foreach($result as $row){ ?>
                     <div class="horizontal-center">
                         <div class="row">
                             <div class="col-md-30"style="margin-top:50px">
@@ -49,7 +49,7 @@
                             </div>
                         </div>
 					</div>
-                 <?php 
+                 <?php
                 }//end forEach
             }
             else{

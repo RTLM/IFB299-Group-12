@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if($_SESSION["login"]==true && $_SESSION["accountType"]=="Admin"){
+    if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner" || $_SESSION["accountType"]=="Driver")){
     }
     else{
         header("Location:index.php");
