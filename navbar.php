@@ -39,7 +39,7 @@ $owner = array(
 					echo updateNav($customer);
 				} else if ($_SESSION['accountType'] == "Driver") {
 					echo updateNav($driver);
-				} else if ($_SESSION['accountType'] == "Admin") {
+				} else if ($_SESSION['accountType'] == "Owner") {
 					echo updateNav($owner);
 				}
 			} else {

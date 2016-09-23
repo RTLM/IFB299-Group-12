@@ -24,7 +24,8 @@
             $sqlSt = "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
-                foreach($result as $row){?>
+                foreach($result as $row){
+					if ($row['status'] != 'Cancelled') {?>
                         <div class="row">
                             <div class="col-md-30">
                                 <div class="panel-group">
@@ -42,11 +43,23 @@
                                             date_add($date, date_interval_create_from_date_string('5 weekdays'));
                                             echo $date->format('d/m/Y'); ?>
                                         </div>
+										<?php
+											if ($row['status'] = 'Pending') {
+										?>
+										<form action = "markCancelled.php" method="post" name="statusMarker">
+                                            <div class="btn-container-right">
+                                                <button type="submit" name="statusCancel" value=<?php echo $row['orderNo']; ?> class="btn btn-danger btn-space">Cancel Order</button>				
+                                            </div>
+                                        </form>
+										<?php
+											}
+										?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                  <?php 
+					}
                 }//end forEach
             }
             else{
