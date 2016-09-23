@@ -12,7 +12,7 @@
             include 'database.php';			
             $db = new database;
             $db->connectToDatabase();
-            $sql = ("SELECT orders.accountNo, orderNo, size, weight, destination, receiversName, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo");
+            $sql = ("SELECT orders.accountNo, orderNo, size, weight, destination, receiversName, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
             $result = $db->getArrayOfValues($sql);
         ?>
          <h2 class="text-center">Order # <?php echo $result[0]['orderNo']; ?> </h2>    
