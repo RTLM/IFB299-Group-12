@@ -6,10 +6,23 @@
     $destination = htmlspecialchars($_POST['destination']);
     $receiversName = htmlspecialchars($_POST['receiversname']);
     $pickup = htmlspecialchars($_POST['pickup']);
+	$priority = htmlspecialchars($_POST['priority']);
     $status = "Pending";
     $date = date("Y-m-d");
     $id = $_SESSION['accountNo'];
-    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date');";
+	switch ($_POST['priority']) {
+		case 1:
+			date_add($date, date_interval_create_from_date_string('1 weekdays'));
+			break;
+		case 2:
+			date_add($date, date_interval_create_from_date_string('3 weekdays'));
+			break;
+		case 3:
+			date_add($date, date_interval_create_from_date_string('5 weekdays'));
+			break;
+	};
+	$estimate = date_format($date, "Y-m-d");
+    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimate', '$priority');";
     $_SESSION["orderSQL"] = $_SESSION["orderSQL"].$sql;
     ?>
 <!DOCTYPE html>
@@ -28,27 +41,38 @@
                   <div class="form-group">
                         <label for="email">Email Address:</label>
                         <p class="form-control-static"><?php echo $_SESSION['emailId']; ?></p>
-                        <input type="hidden" value=<?php echo $_POST['email']; ?> name="email" />
                   </div>
                   <div class="form-group">
                         <label for="destination">Destination:</label>
                         <p class="form-control-static"><?php echo $_POST['destination']; ?></p>
-                        <input type="hidden" value=<?php echo $_POST['destination']; ?> name="destination" />
                   </div>
                   <div class="form-group">
                         <label for="pickup">Pick Up:</label>
                         <p class="form-control-static"><?php echo $_POST['pickup']; ?></p>
-                        <input type="hidden" value=<?php echo $_POST['pickup']; ?> name="pickup" />
                   </div>
                   <div class="form-group">
                         <label for="receiversname">Receiver's Name:</label>
                         <p class="form-control-static"><?php echo $_POST['receiversname']; ?></p>
-                        <input type="hidden" value=<?php echo $_POST['receiversname']; ?> name="receiversname" />
                   </div>
                   <div class="form-group">
                         <label for="receiverscontact">Receiver's Contact Number:</label>
                         <p class="form-control-static"><?php echo $_POST['receiverscontact']; ?></p>
-                        <input type="hidden" value=<?php echo $_POST['receiverscontact']; ?> name="receiverscontact" />
+                  </div>	  
+                  <div class="form-group">
+                        <label for="priority">Package Priority:</label>
+                        <p class="form-control-static"><?php 
+						switch ($_POST['priority']) {
+							case 1:
+								echo "Overnight";
+								break;
+							case 2:
+								echo "Express";
+								break;
+							case 3:
+								echo "Standard";
+								break;
+						}
+						?></p>
                   </div>	  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                   <a href="order.php" class="btn btn-primary" role="button">Add Order</a>
