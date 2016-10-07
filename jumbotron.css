@@ -35,6 +35,11 @@ body {
   direction: rtl;
 }
 
+.div-inline{
+    display:inline-block;
+}
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
