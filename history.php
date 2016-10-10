@@ -50,7 +50,9 @@
 													echo "Standard";
 													break;
 											} ?><br>
-                                            Estimated Delivery: <?php echo $row['estimatedDelivery']; ?>
+                                            Estimated Delivery: <?php 
+											$date = date_create($row['estimatedDelivery']);
+											echo date_format($date, "d/m/Y");?>
                                         </div>
 										<?php
 											if ($row['status'] = 'Pending') {

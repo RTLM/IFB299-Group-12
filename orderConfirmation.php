@@ -1,5 +1,6 @@
 <?php
     session_start();
+
     $email = $_SESSION["emaiId"];
     $accountNo = $_SESSION["accountNo"];
     $receiversContact = htmlspecialchars($_POST['receiverscontact']);
@@ -10,20 +11,21 @@
     $status = "Pending";
     $date = date("Y-m-d");
     $id = $_SESSION['accountNo'];
+	$prioritydate = date_create($date);
 	switch ($_POST['priority']) {
 		case 1:
-			date_add($date, date_interval_create_from_date_string('1 weekdays'));
+			date_add($prioritydate, date_interval_create_from_date_string('1 weekdays'));
 			break;
 		case 2:
-			date_add($date, date_interval_create_from_date_string('3 weekdays'));
+			date_add($prioritydate, date_interval_create_from_date_string('3 weekdays'));
 			break;
 		case 3:
-			date_add($date, date_interval_create_from_date_string('5 weekdays'));
+			date_add($prioritydate, date_interval_create_from_date_string('5 weekdays'));
 			break;
-	};
-	$estimate = date_format($date, "Y-m-d");
-    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimate', '$priority');";
-    $_SESSION["orderSQL"] = $_SESSION["orderSQL"].$sql;
+	}
+	$estimatedDelivery = date_format($prioritydate, 'Y-m-d');
+    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimatedDelivery', '$priority');";
+	$_SESSION["orderSQL"] = $_SESSION["orderSQL"].$sql;
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +42,8 @@
                 <form method="POST" action="addOrder.php">
                   <div class="form-group">
                         <label for="email">Email Address:</label>
-                        <p class="form-control-static"><?php echo $_SESSION['emailId']; ?></p>
+                        <p class="form-control-static"><?php echo $_SESSION['emailId'];
+						?></p>
                   </div>
                   <div class="form-group">
                         <label for="destination">Destination:</label>
@@ -57,21 +60,21 @@
                   <div class="form-group">
                         <label for="receiverscontact">Receiver's Contact Number:</label>
                         <p class="form-control-static"><?php echo $_POST['receiverscontact']; ?></p>
-                  </div>	  
+                  </div>				  
                   <div class="form-group">
                         <label for="priority">Package Priority:</label>
                         <p class="form-control-static"><?php 
-						switch ($_POST['priority']) {
-							case 1:
-								echo "Overnight";
-								break;
-							case 2:
-								echo "Express";
-								break;
-							case 3:
-								echo "Standard";
-								break;
-						}
+							switch ($priority) {
+								case 1:
+									echo "Overnight";
+									break;
+								case 2:
+									echo "Express";
+									break;
+								case 3:
+									echo "Standard";
+									break;
+							}
 						?></p>
                   </div>	  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
