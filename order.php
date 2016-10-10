@@ -30,7 +30,20 @@
 					<div class="form-group">
 						<label for="receiverscontact">Receiver's Contact Number:</label>
 						<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number">
-					</div>	  
+					</div>
+					<div class="form-group">
+						<label for="weight">Package Weight (Kgs):</label>
+						<input type="text" class="form-control" id="weight" name="weight" placeholder="Package Weight in Kilograms">
+					</div>	
+					<div class="form-group">
+						<label for="size">Package Size:</label>
+						<select class="form-control" id="size" name="size">
+							<option value="Small">Small</option>
+							<option value="Medium">Medium</option>
+							<option value="Large">Large</option>
+							<option value="X-Large">X-Large</option>
+						</select>
+					</div>									
 					<div class="form-group">
 						<label for="priority">Package Priority:</label>
 						<select class="form-control" id="priority" name="priority">

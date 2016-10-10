@@ -24,7 +24,9 @@
 			break;
 	}
 	$estimatedDelivery = date_format($prioritydate, 'Y-m-d');
-    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimatedDelivery', '$priority');";
+	$size = htmlspecialchars($_POST['size']);
+	$weight = htmlspecialchars($_POST['weight']);
+    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority, size, weight) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimatedDelivery', '$priority', '$size', '$weight');";
 	$_SESSION["orderSQL"] = $_SESSION["orderSQL"].$sql;
     ?>
 <!DOCTYPE html>
@@ -60,6 +62,14 @@
                   <div class="form-group">
                         <label for="receiverscontact">Receiver's Contact Number:</label>
                         <p class="form-control-static"><?php echo $_POST['receiverscontact']; ?></p>
+                  </div>
+				  <div class="form-group">
+                        <label for="weight">Package Weight:</label>
+                        <p class="form-control-static"><?php echo $_POST['weight'] . ' Kgs'; ?></p>
+                  </div>
+				  <div class="form-group">
+                        <label for="size">Package Size:</label>
+                        <p class="form-control-static"><?php echo $_POST['size']; ?></p>
                   </div>				  
                   <div class="form-group">
                         <label for="priority">Package Priority:</label>
@@ -76,7 +86,8 @@
 									break;
 							}
 						?></p>
-                  </div>	  
+                  </div>
+				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo packageCost($_POST['priority'], $_POST['size'], $_POST['weight']); ?></h2>				  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                   <a href="order.php" class="btn btn-primary" role="button">Add Order</a>
                   <a href="cancelOrder.php" class="btn btn-danger" role="button">Cancel</a>

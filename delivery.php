@@ -17,7 +17,7 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate FROM orders WHERE status NOT IN ('Complete', 'Cancelled') ;";
+            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate, estimatedDelivery, priority FROM orders WHERE status NOT IN ('Complete', 'Cancelled') ORDER BY estimatedDelivery, priority;";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 foreach($result as $row){ ?>
@@ -25,18 +25,29 @@
                         <div class="row">
                             <div class="col-md-30"style="margin-top:50px">
                                 <div class="panel-group">
-                                    <div class="panel panel-<?php $orderDate = new DateTime($row['orderDate']); echo statusOfDeliveryForDriver($orderDate,$row["status"])?>">
+                                    <div class="panel panel-<?php $deliveryDate = new DateTime($row['estimatedDelivery']); echo statusOfDeliveryForDriver($deliveryDate, $row["status"])?>">
                                         <div class="panel-heading">
                                             Order #<?php echo $row['orderNo']; ?>
                                         </div>
                                         <div class="panel-body"> 
                                             Pick-Up From: <?php echo $row['pickUp']; ?><br>
                                             Destination: <?php echo $row['destination']; ?><br>                                            
-                                            Status: <?php echo $row['status']; ?><br>
                                             Estimated Delivery: <?php 
-                                            $date = new DateTime($row['orderDate']);
-                                            date_add($date, date_interval_create_from_date_string('5 weekdays'));
-                                            echo $date->format('d/m/Y'); ?>
+											$date = date_create($row['estimatedDelivery']);
+											echo date_format($date, "d/m/Y");?><br>
+											Priority: <?php 							
+												switch ($row['priority']) {
+												case 1:
+													echo "Overnight";
+													break;
+												case 2:
+													echo "Express";
+													break;
+												case 3:
+													echo "Standard";
+													break;
+												}?><br>
+											Status: <?php echo $row['status']; ?>
                                         </div>
                                         <form action = "markComplete.php" method="post" name="statusMarker">
                                             <div class="btn-container-right">
