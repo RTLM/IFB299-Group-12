@@ -1,10 +1,12 @@
 <?php
 include "database.php";
-if(isset($_POST["statusComplete"])){
+if(isset($_POST["status"])){
     $db = new database;
     $db->connectToDatabase();
-    $orderNumber = htmlspecialchars($_POST["statusComplete"]);
-    $sql = "UPDATE `orders` SET `status`='Complete' WHERE `orderNo`='$orderNumber';";
+    $status = htmlspecialchars($_POST["status"]);
+    echo "<script>console.log('$status')</script>";
+    $orderNumber = htmlspecialchars($_POST["orderNumber"]);
+    $sql = "UPDATE `orders` SET `status`='$status' WHERE `orderNo`='$orderNumber';";
     if($db->runASqlQuery($sql)){
         header("Location:delivery.php");
     }
