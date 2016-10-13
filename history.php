@@ -10,12 +10,14 @@
     <?php
         include "head.php"
     ?>
-    <body>
+    <body onload = "clickElement('completed')">
 	<?php
         include 'navbar.php';
 	?>
         
     <div class="horizontal-center">
+    <input id = "completed" onclick = "hideElements(1);" type="radio" name="vehicle" value="Bike">Completed
+    <input id = "pending" onclick = "hideElements(2);" type="radio" name="vehicle" value="Bike">Pending
 	<h2 class="text-center">Order History</h2>
 		<?php
             include 'database.php';
@@ -26,7 +28,7 @@
             if (isset($result)) {
                 foreach($result as $row){
 					if ($row['status'] != 'Cancelled') {?>
-                        <div class="row">
+                        <div name = <?php echo '"'.$row['status'].'"' ?> class="row">
                             <div class="col-md-30">
                                 <div class="panel-group">
                                     <div class="panel panel-primary">
@@ -44,7 +46,7 @@
                                             echo $date->format('d/m/Y'); ?>
                                         </div>
 										<?php
-											if ($row['status'] = 'Pending') {
+											if ($row['status'] == 'Pending') {
 										?>
 										<form action = "markCancelled.php" method="post" name="statusMarker">
                                             <div class="btn-container-right">
