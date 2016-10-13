@@ -2,13 +2,17 @@
 function statusOfDeliveryForDriver($deliveryDate,$status){
     $now = new DateTime('now');
     $interval = date_diff($now, $deliveryDate);
-    if ($interval->days < 2 && $status != "Complete"){
-        return "danger";
-    }else if($interval->days < 4 && $status != "Complete"){
-        return "warning";
-    }else {
-        return "success";
-    }
+	if ($now < $deliveryDate) {
+		if ($interval->days < 2 && $status != "Complete"){
+			return "danger";
+		}else if($interval->days < 4 && $status != "Complete"){
+			return "warning";
+		}else {
+			return "success";
+		}
+	} else {
+		return "danger";
+	}
 }
 function changeHomePageAccordingUserStatus($loggedIn){
     if($loggedIn){
