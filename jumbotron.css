@@ -50,3 +50,27 @@ html {
   height: 60px;
   background-color: #f5f5f5;
 }
+
+.jumbotron {
+			background-image: url("banner.png");
+			background-size: 1000px 450px;
+			background-attachment: fixed;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 500px;
+		}
+		
+.btn-lg1 {
+	padding: 10px 20px;
+	background: none;
+	border: 3px solid #0099cc;
+	color: #0099cc;
+	
+}
+.btn-lg1:hover{
+	border: 3px solid #007299;
+	color: #007299;
+	padding: 10px 20px;
+	background: none;
+}

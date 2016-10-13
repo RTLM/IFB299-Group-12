@@ -12,8 +12,14 @@
             include 'navbar.php';
         ?>
 			<div class="container">
+			<div class="col-md-8 col-md-offset-2" style="background-color:white">
+			<center><img src="padlock-closed2.png" style="width: 25px; height:10px;"></center><!-- used as padding for form, needs to be replaced-->
+			</div>
+			<div class="col-md-8 col-md-offset-2" style="background-color:#528ae5">
 			<h2 class="text-center">New Order</h2>
-				<div class="col-md-8 col-md-offset-2" style="background-color:#eee">
+			<!--<center><img src="padlock-closed2.png" style="width: 25px; height:30px;"></center>-->
+			</div>
+				<div class="col-md-8 col-md-offset-2" style="background-color:#a8aeb7">
 					<form method="POST" action="orderConfirmation.php">
 					<div class="form-group">
 						<label for="destination">Destination:</label>

@@ -12,14 +12,14 @@ function statusOfDeliveryForDriver($deliveryDate,$status){
 }
 function changeHomePageAccordingUserStatus($loggedIn){
     if($loggedIn){
-        echo '<p>To On The Spot delivery service. Click the button below to begin your order</p>'
-        . '<p><a class="btn btn-primary btn-lg" href="order.php" role="button">Start Order &raquo;</a></p>';
+        echo '<center> <p>Click the button below to begin your order</p>'
+        . '<p><a class="btn btn-primary btn-lg1" href="order.php" role="button">Start Order </a></p></center>';
     }
     else{
-        echo '<p>To On The Spot delivery service. Login to make an order</p>'
-        . '<p><a class="btn btn-primary btn-lg" href="signin.php" role="button">Login &raquo;</a></p>'
-        . '<p>Or </p>'
-        . '<p><a class="btn btn-primary btn-lg" href="register.php" role="button">Register &raquo;</a></p>';
+        echo '<center><p>Welcome To On The Spot Delivery, please login to make an order</p>'
+        . '<p><a class="btn btn-primary btn-lg1" href="signin.php" role="button">Login</a></p>'
+        . '<p>Or create an account </p>'
+        . '<p><a class="btn btn-primary btn-lg1" href="register.php" role="button">Register </a></p></center>';
     }
 }
 function alertUser($variable,$stringToDisplay){
