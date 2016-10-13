@@ -21,7 +21,7 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";";
+            $sqlSt = "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate, estimatedDelivery, priority FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 foreach($result as $row){
@@ -38,10 +38,21 @@
                                             Destination: <?php echo $row['destination']; ?><br>
                                             Sent From: <?php echo $row['pickUp']; ?><br>
                                             Status: <?php echo $row['status']; ?><br>
+											Priority: <?php
+											switch ($row['priority']) {
+												case 1:
+													echo "Overnight";
+													break;
+												case 2:
+													echo "Express";
+													break;
+												case 3:
+													echo "Standard";
+													break;
+											} ?><br>
                                             Estimated Delivery: <?php 
-                                            $date = new DateTime($row['orderDate']);
-                                            date_add($date, date_interval_create_from_date_string('5 weekdays'));
-                                            echo $date->format('d/m/Y'); ?>
+											$date = date_create($row['estimatedDelivery']);
+											echo date_format($date, "d/m/Y");?>
                                         </div>
 										<?php
 											if ($row['status'] = 'Pending') {
