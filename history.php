@@ -10,23 +10,25 @@
     <?php
         include "head.php"
     ?>
-    <body>
+    <body onload = "clickElement('completed')">
 	<?php
         include 'navbar.php';
 	?>
         
     <div class="horizontal-center">
+    <input id = "completed" onclick = "hideElements(1);" type="radio" name="vehicle" value="Bike">Completed
+    <input id = "pending" onclick = "hideElements(2);" type="radio" name="vehicle" value="Bike">Pending
 	<h2 class="text-center">Order History</h2>
 		<?php
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate, estimatedDelivery, priority FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";";
+            $sqlSt = "SELECT orderNo, accountNo, destination, receiversName, status, pickUp, orderDate FROM orders WHERE accountNo = ".$_SESSION["accountNo"].";";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 foreach($result as $row){
 					if ($row['status'] != 'Cancelled') {?>
-                        <div class="row">
+                        <div name = <?php echo '"'.$row['status'].'"' ?> class="row">
                             <div class="col-md-30">
                                 <div class="panel-group">
                                     <div class="panel panel-primary">
@@ -38,24 +40,13 @@
                                             Destination: <?php echo $row['destination']; ?><br>
                                             Sent From: <?php echo $row['pickUp']; ?><br>
                                             Status: <?php echo $row['status']; ?><br>
-											Priority: <?php
-											switch ($row['priority']) {
-												case 1:
-													echo "Overnight";
-													break;
-												case 2:
-													echo "Express";
-													break;
-												case 3:
-													echo "Standard";
-													break;
-											} ?><br>
                                             Estimated Delivery: <?php 
-											$date = date_create($row['estimatedDelivery']);
-											echo date_format($date, "d/m/Y");?>
+                                            $date = new DateTime($row['orderDate']);
+                                            date_add($date, date_interval_create_from_date_string('5 weekdays'));
+                                            echo $date->format('d/m/Y'); ?>
                                         </div>
 										<?php
-											if ($row['status'] = 'Pending') {
+											if ($row['status'] == 'Pending') {
 										?>
 										<form action = "markCancelled.php" method="post" name="statusMarker">
                                             <div class="btn-container-right">

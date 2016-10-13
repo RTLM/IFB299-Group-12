@@ -11,44 +11,33 @@
     <?php
         include "head.php"
     ?>
-    <body>
+    <body onload ="changeCursorType('pointer','a');">
         <?php
             include 'navbar.php';
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate, estimatedDelivery, priority FROM orders WHERE status NOT IN ('Complete', 'Cancelled') ORDER BY estimatedDelivery, priority;";
+            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate FROM orders WHERE status NOT IN ('Complete', 'Cancelled') ;";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 $formId = 0;
                 foreach($result as $row){ ?>
                     <div class="horizontal-center">
                         <div class="row">
-                            <div class="col-md-30"style="margin-top:50px">
+                            <div class="col-md-30" style="margin-top:50px">
                                 <div class="panel-group">
-                                    <div class="panel panel-<?php $deliveryDate = new DateTime($row['estimatedDelivery']); echo statusOfDeliveryForDriver($deliveryDate, $row["status"])?>">
+                                    <div class="panel panel-<?php $orderDate = new DateTime($row['orderDate']); echo statusOfDeliveryForDriver($orderDate,$row["status"])?>">
                                         <div class="panel-heading">
                                             Order #<?php echo $row['orderNo']; ?>
                                         </div>
                                         <div class="panel-body"> 
-                                            Pick-Up From: <?php echo $row['pickUp']; ?><br>
-                                            Destination: <?php echo $row['destination']; ?><br>                                            
-                                            Estimated Delivery: <?php 
-											$date = date_create($row['estimatedDelivery']);
-											echo date_format($date, "d/m/Y");?><br>
-											Priority: <?php 							
-												switch ($row['priority']) {
-												case 1:
-													echo "Overnight";
-													break;
-												case 2:
-													echo "Express";
-													break;
-												case 3:
-													echo "Standard";
-													break;
-												}?><br>
-											Status: <?php echo $row['status']; ?>
+                                            <span class="spanClassForOrderDetails">Pick-Up From: <?php echo $row['pickUp']; ?></span><br>
+                                            <span class="spanClassForOrderDetails">Destination: <?php echo $row['destination']; ?></span><br>                                            
+                                            <span class="spanClassForOrderDetails">Status: <?php echo $row['status']; ?></span><br>
+                                            <span class="spanClassForOrderDetails">Estimated Delivery:<?php 
+                                            $date = new DateTime($row['orderDate']);
+                                            date_add($date, date_interval_create_from_date_string('5 weekdays'));
+                                            echo $date->format('d/m/Y'); ?></span>
                                         </div>
                                         <form id = <?php echo '"form'."$formId".'"'; ?> action = "markComplete.php" method="post">		 <div class="btn-container-right">
 												<div class="dropdown div-inline">
