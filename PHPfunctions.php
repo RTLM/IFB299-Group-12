@@ -1,4 +1,30 @@
 <?php
+
+$guest = array(
+  'home'  => array('text'=>'Home',  'url'=>'/index.php'),
+  'about' => array('text'=>'About', 'url'=>'/about.php'),
+);
+
+$customer = array(
+  'home'  => array('text'=>'Home',  'url'=>'/index.php'),
+  'order'  => array('text'=>'Order',  'url'=>'/order.php'),
+  'history' => array('text'=>'History', 'url'=>'/history.php'),
+  'about' => array('text'=>'About', 'url'=>'/about.php'),
+);
+
+$driver = array(
+  'assigned'  => array('text'=>'Assigned',  'url'=>'/assigned.php'),
+  'deliveries'  => array('text'=>'Deliveries',  'url'=>'/delivery.php'),
+  'pickups'  => array('text'=>'Pick-Ups',  'url'=>'/pickups.php'),
+);
+
+$owner = array(
+  'unassigned'  => array('text'=>'Unassigned',  'url'=>'/unassigned.php'),
+  'deliveries'  => array('text'=>'Deliveries',  'url'=>'/delivery.php'),
+  'pickups'  => array('text'=>'Pick-Ups',  'url'=>'/pickups.php'),
+  'records'  => array('text'=>'Records',  'url'=>'/records.php'),
+);
+
 function statusOfDeliveryForDriver($deliveryDate,$status){
     $now = new DateTime('now');
     $interval = date_diff($now, $deliveryDate);
@@ -33,7 +59,22 @@ function alertUser($variable,$stringToDisplay){
     }   
 }
 
-function updateNav($items) {
+function updateNav($account) {
+	global $customer, $driver, $owner, $guest;
+	switch ($account) {
+		case "Customer":
+			$items = $customer;
+			break;
+		case "Driver":
+			$items = $driver;
+			break;
+		case "Owner":
+			$items = $owner;
+			break;
+		case NULL:
+			$items = $guest;
+			break;
+	}
 	$active = "class=\"active\"";
 	foreach($items as $item) {
 		$html .= "<li " . ($_SERVER['PHP_SELF']==$item['url'] ? $active : ''). "><a href='{$item['url']}'>{$item['text']}</a></li>\n";

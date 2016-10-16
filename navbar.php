@@ -1,28 +1,8 @@
 <?php 
+
 session_start();
 include 'PHPfunctions.php';
 
-$customer = array(
-  'home'  => array('text'=>'Home',  'url'=>'/index.php'),
-  'order'  => array('text'=>'Order',  'url'=>'/order.php'),
-  'history' => array('text'=>'History', 'url'=>'/history.php'),
-  'about' => array('text'=>'About', 'url'=>'/about.php'),
-);
-
-$guest = array(
-  'home'  => array('text'=>'Home',  'url'=>'/index.php'),
-  'about' => array('text'=>'About', 'url'=>'/about.php'),
-);
-
-
-$driver = array(
-  'deliveries'  => array('text'=>'Deliveries',  'url'=>'/delivery.php'),
-);
-
-$owner = array(
-  'deliveries'  => array('text'=>'Deliveries',  'url'=>'/delivery.php'),
-  'records'  => array('text'=>'Records',  'url'=>'/records.php'),
-);
 ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -34,17 +14,7 @@ $owner = array(
 	  	  
             <ul class="nav navbar-nav">
 			<?php 
-			if ($_SESSION["login"]){			
-				if ($_SESSION['accountType'] == "Customer") {
-					echo updateNav($customer);
-				} else if ($_SESSION['accountType'] == "Driver") {
-					echo updateNav($driver);
-				} else if ($_SESSION['accountType'] == "Owner") {
-					echo updateNav($owner);
-				}
-			} else {
-				echo updateNav($guest);
-			}
+				echo updateNav($_SESSION['accountType']);
 			?>
             </ul>
             <?php if ($_SESSION["login"]){ ?>
