@@ -185,8 +185,14 @@
                                 <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight e.g. 0.5">
                             </div>
                             <div class="form-group">
-                                <label for="size">Size (Cms):</label>
-                                <input type="text" class="form-control" id="size" name="size" placeholder="Size e.g. 10x10x10">
+                                <label for="size">Package Size:</label>
+									<select class="form-control" id="size" name="size">
+										<option hidden value="" selected disabled>Select a Size</option>
+										<option value="Small">Small</option>
+										<option value="Medium">Medium</option>
+										<option value="Large">Large</option>
+										<option value="X-Large">X-Large</option>
+									</select>
                             </div>  
                             <div class="form-group">
                             <input type="hidden" value=<?php echo $row['orderNo']; ?> name="orderNo" />

@@ -44,6 +44,7 @@
 					<div class="form-group">
 						<label for="size">Package Size:</label>
 						<select class="form-control" id="size" name="size">
+							<option hidden value="" selected disabled>Select a Size</option>
 							<option value="Small">Small</option>
 							<option value="Medium">Medium</option>
 							<option value="Large">Large</option>
