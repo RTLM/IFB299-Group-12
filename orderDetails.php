@@ -1,25 +1,31 @@
 <?php
-    session_start();
+    session_start();	
+	$previous = $_SERVER['HTTP_REFERER'];
+	include 'navbar.php';
+	include 'database.php';			
+	$db = new database;
+	$db->connectToDatabase();
+	$sql = ("SELECT orders.accountNo, firstName, lastName, address, orderNo, size, weight, destination, receiversName, driver, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName, estimatedDelivery, priority, paid, paymentType, valuable FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
+	$result = $db->getArrayOfValues($sql);
+	$row = $result[0];
+	if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner" || $_SESSION["accountType"]=="Driver")){
+		$admin = true;
+    } else if ($_SESSION["login"]==true && ($_SESSION["accountNo"]==$row['accountNo'])){
+		$admin = false;
+	} else {
+        header("Location:index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <?php
         include "head.php";
     ?>
-    <body>
-        <?php
-            include 'navbar.php';
-            include 'database.php';			
-            $db = new database;
-            $db->connectToDatabase();
-            $sql = ("SELECT orders.accountNo, firstName, lastName, address, orderNo, size, weight, destination, receiversName, driver, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName, estimatedDelivery, priority, paid, paymentType, valuable FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
-            $result = $db->getArrayOfValues($sql);
-			$row = $result[0];
-        ?>      
+    <body> 
 			<div class="container">
 				<h1 class="display-4 text-center">Order # <?php echo $row['orderNo']; ?> </h1>
 				<p class="lead">Customer</p>
-					<table class="table table-striped">	
+					<table class="table table-hover table-striped">	
 						<tbody>
 							<tr>
 								<th>Account Number</th>
@@ -40,7 +46,7 @@
 						</tbody>
 					</table>
 				<p class="lead">Receiver</p>
-					<table class="table table-striped">	
+					<table class="table table-hover table-striped">	
 						<tbody>	
 							<tr>
 								<th>Name</th>
@@ -53,7 +59,7 @@
 						</tbody>
 					</table>
 					<p class="lead">Package Details</p>
-					<table class="table table-striped">	
+					<table class="table table-hover table-striped">	
 						<tbody>	
 							<tr>
 								<th>Pick-Up</th>
@@ -89,7 +95,7 @@
 						</tbody>
 					</table>
 					<p class="lead">Order Details</p>
-					<table class="table table-striped">	
+					<table class="table table-hover table-striped">	
 						<tbody>	
 							<tr>
 								<th>Status</th>
@@ -164,8 +170,10 @@
 						</tbody>
 					</table>
 				<p align="center">
+					<?php if ($admin) { ?>
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#weightSizeModal">Update Weight and Size</button>
-					<a class="btn btn-success" href="delivery.php" role="button">Done</a>
+					<?php } ?>
+					<a class="btn btn-success" href="<?php echo $previous ?>" role="button">Done</a>
 				</p>
 			</div>			
 

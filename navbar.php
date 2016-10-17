@@ -24,6 +24,9 @@ include 'PHPfunctions.php';
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
+					<?php if ($_SESSION["accountType"] == "Customer"){ ?>
+					<li><a href="accountDetails.php">Account Details</a></li>
+					<?php } ?>
                     <li><a href="logout.php">Log Out</a></li>
                   </ul>
                 </div>
