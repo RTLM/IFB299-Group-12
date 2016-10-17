@@ -23,6 +23,7 @@ $owner = array(
   'deliveries'  => array('text'=>'Deliveries',  'url'=>'/delivery.php'),
   'pickups'  => array('text'=>'Pick-Ups',  'url'=>'/pickups.php'),
   'records'  => array('text'=>'Records',  'url'=>'/records.php'),
+  'drivers'  => array('text'=>'Drivers',  'url'=>'/drivers.php'),
 );
 
 function statusOfDeliveryForDriver($deliveryDate,$status){
@@ -80,6 +81,21 @@ function updateNav($account) {
 		$html .= "<li " . ($_SERVER['PHP_SELF']==$item['url'] ? $active : ''). "><a href='{$item['url']}'>{$item['text']}</a></li>\n";
 	}
 	return $html;
+}
+
+function priority($priority) {
+	switch ($priority) {
+		case 1:
+			$string = "Overnight";
+			break;
+		case 2:
+			$string =  "Express";
+			break;
+		case 3:
+			$string =  "Standard";
+			break;
+	}
+	return $string;
 }
 
 function packageCost($priority, $size, $weight) {

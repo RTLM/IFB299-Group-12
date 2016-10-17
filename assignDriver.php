@@ -6,7 +6,7 @@ if(isset($_POST["driver"])){
     $driver = htmlspecialchars($_POST["driver"]);
     echo "<script>console.log('$driver')</script>";
     $orderNumber = htmlspecialchars($_POST["orderNumber"]);
-    $sql = "UPDATE `orders` SET `driver`='$driver' WHERE `orderNo`='$orderNumber';";
+    $sql = "UPDATE orders SET driver='$driver', status='Ready For Pickup' WHERE orderNo='$orderNumber';";
     if($db->runASqlQuery($sql)){
         header("Location:unassigned.php");
     }

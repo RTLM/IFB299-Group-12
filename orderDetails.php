@@ -1,7 +1,6 @@
 <?php
     session_start();	
 	$previous = $_SERVER['HTTP_REFERER'];
-	include 'navbar.php';
 	include 'database.php';			
 	$db = new database;
 	$db->connectToDatabase();
@@ -22,160 +21,155 @@
         include "head.php";
     ?>
     <body> 
-			<div class="container">
-				<h1 class="display-4 text-center">Order # <?php echo $row['orderNo']; ?> </h1>
-				<p class="lead">Customer</p>
-					<table class="table table-hover table-striped">	
-						<tbody>
-							<tr>
-								<th>Account Number</th>
-									<td class="col-md-6"><?php echo $row['accountNo']; ?></td>
-							</tr>
-							<tr>
-								<th>Name</th>
-									<td><?php echo $row['firstName'] . " " . $row['lastName']; ?></td>
-							</tr>
-							<tr>
-								<th>Contact Number</th>
-									<td><?php echo $row['contactNo']; ?></td>
-							</tr>
-							<tr>
-								<th>Address</th>
-									<td><?php echo $row['address']; ?></td>
-							</tr>
-						</tbody>
-					</table>
-				<p class="lead">Receiver</p>
-					<table class="table table-hover table-striped">	
-						<tbody>	
-							<tr>
-								<th>Name</th>
-									<td class="col-md-6"><?php echo $row['receiversName']; ?></td>
-							</tr>
-							<tr>
-								<th>Contact Number</th>
-									<td><?php echo $row['receiversContact']; ?></td>
-							</tr>
-						</tbody>
-					</table>
-					<p class="lead">Package Details</p>
-					<table class="table table-hover table-striped">	
-						<tbody>	
-							<tr>
-								<th>Pick-Up</th>
-									<td class="col-md-6"><?php echo $row['pickUp']; ?></td>
-							</tr>
-							<tr>
-								<th>Destination</th>
-									<td><?php echo $row['destination']; ?></td>
-							</tr>
-							<tr>
-								<th>Size</th>
-									<td><?php 
-										if(!empty($row['size'])) { 
-											echo $row['size'];
-										} else { 
-											echo '-' ;}; 
-									?></td>
-							</tr>
-							<tr>
-								<th>Weight</th>
-									<td><?php 
-										if(!empty($row['weight'])) { 
-											echo $row['weight'] . ' Kgs';
-										} else { 
-											echo '-' ;
-										}; 
-									?></td>
-							</tr>							
-							<tr>
-								<th>Cost</th>
-									<td><?php echo '$' . packageCost($row['priority'], $row['size'], $row['weight']); ?></td>
-							</tr>
-						</tbody>
-					</table>
-					<p class="lead">Order Details</p>
-					<table class="table table-hover table-striped">	
-						<tbody>	
-							<tr>
-								<th>Status</th>
-									<td class="col-md-6"><?php echo $row['status']; ?></td>
-							</tr>
-							<tr>
-								<th>Priority</th>
-									<td><?php
-										switch ($row['priority']) {
-											case 1:
-												echo "Overnight";
-												break;
-											case 2:
-												echo "Express";
-												break;
-											case 3:
-												echo "Standard";
-												break;
-										} ?>
-									</td>
-							</tr>
-							<tr>
-								<th>Valuable</th>
-									<td><?php 
-									if($row['valuable'] == "TRUE") { 
-										echo "Yes";
+	<?php
+		include 'navbar.php';
+	?>
+		<div class="container">
+		<div class="row" style="margin-top:25px">
+			<h1 class="text-center">Order #<?php echo $row['orderNo']; ?> </h1>
+			<p class="lead">Customer</p>
+				<table class="table table-striped">	
+					<tbody>
+						<tr>
+							<th>Account Number</th>
+								<td class="col-md-6"><?php echo $row['accountNo']; ?></td>
+						</tr>
+						<tr>
+							<th>Name</th>
+								<td><?php echo $row['firstName'] . " " . $row['lastName']; ?></td>
+						</tr>
+						<tr>
+							<th>Contact Number</th>
+								<td><?php echo $row['contactNo']; ?></td>
+						</tr>
+						<tr>
+							<th>Address</th>
+								<td><?php echo $row['address']; ?></td>
+						</tr>
+					</tbody>
+				</table>
+			<p class="lead">Receiver</p>
+				<table class="table table-striped">	
+					<tbody>	
+						<tr>
+							<th>Name</th>
+								<td class="col-md-6"><?php echo $row['receiversName']; ?></td>
+						</tr>
+						<tr>
+							<th>Contact Number</th>
+								<td><?php echo $row['receiversContact']; ?></td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="lead">Package Details</p>
+				<table class="table table-striped">	
+					<tbody>	
+						<tr>
+							<th>Pick-Up</th>
+								<td class="col-md-6"><?php echo $row['pickUp']; ?></td>
+						</tr>
+						<tr>
+							<th>Destination</th>
+								<td><?php echo $row['destination']; ?></td>
+						</tr>
+						<tr>
+							<th>Size</th>
+								<td><?php 
+									if(!empty($row['size'])) { 
+										echo $row['size'];
 									} else { 
-										echo 'No' ;
-									}; ?></td>
-							</tr>
-							<tr>
-								<th>Driver</th>
-									<td><?php 
-									if(!empty($row['driver'])) { 
-										echo $row['driver'];
+										echo '-' ;}; 
+								?></td>
+						</tr>
+						<tr>
+							<th>Weight</th>
+								<td><?php 
+									if(!empty($row['weight'])) { 
+										echo $row['weight'] . ' Kgs';
 									} else { 
 										echo '-' ;
-									}; ?></td>
-							</tr>
-							<tr>
-								<th>Paid</th>
-									<td><?php
-									if($row['paid'] == "TRUE") { 
-										echo "Yes";
-									} else { 
-										echo 'No' ;
-									}; ?></td>
-							</tr>
-							<tr>
-								<th>Payment Type</th>
-									<td><?php
-									if(!empty($row['paymentType'])) { 
-										echo $row['paymentType'];
-									} else { 
-										echo '-' ;
-									}; ?></td>
-							</tr>
-							<tr>
-								<th>Order Date</th>
-									<td>
-										<?php $date = new DateTime($row['orderDate']);
-										echo $date->format('d/m/Y'); ?>
-									</td>
-							</tr>
-							<tr>
-								<th>Estimated Delivery</th>
-									<td>
-										<?php $date = new DateTime($row['estimatedDelivery']);
-										echo $date->format('d/m/Y'); ?>
-									</td>
-							</tr>
-						</tbody>
-					</table>
-				<p align="center">
-					<?php if ($admin) { ?>
-					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#weightSizeModal">Update Weight and Size</button>
-					<?php } ?>
-					<a class="btn btn-success" href="<?php echo $previous ?>" role="button">Done</a>
-				</p>
-			</div>			
+									}; 
+								?></td>
+						</tr>							
+						<tr>
+							<th>Cost</th>
+								<td><?php echo '$' . packageCost($row['priority'], $row['size'], $row['weight']); ?></td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="lead">Order Details</p>
+				<table class="table table-striped">	
+					<tbody>	
+						<tr>
+							<th>Status</th>
+								<td class="col-md-6"><?php echo $row['status']; ?></td>
+						</tr>
+						<tr>
+							<th>Priority</th>
+								<td><?php
+									echo priority($row['priority']); ?>
+								</td>
+						</tr>
+						<tr>
+							<th>Valuable</th>
+								<td><?php 
+								if($row['valuable'] == "TRUE") { 
+									echo "Yes";
+								} else { 
+									echo 'No' ;
+								}; ?></td>
+						</tr>
+						<tr>
+							<th>Driver</th>
+								<td><?php 
+								if(!empty($row['driver'])) { 
+									echo $row['driver'];
+								} else { 
+									echo '-' ;
+								}; ?></td>
+						</tr>
+						<tr>
+							<th>Paid</th>
+								<td><?php
+								if($row['paid'] == "TRUE") { 
+									echo "Yes";
+								} else { 
+									echo 'No' ;
+								}; ?></td>
+						</tr>
+						<tr>
+							<th>Payment Type</th>
+								<td><?php
+								if(!empty($row['paymentType'])) { 
+									echo $row['paymentType'];
+								} else { 
+									echo '-' ;
+								}; ?></td>
+						</tr>
+						<tr>
+							<th>Order Date</th>
+								<td>
+									<?php $date = new DateTime($row['orderDate']);
+									echo $date->format('d/m/Y'); ?>
+								</td>
+						</tr>
+						<tr>
+							<th>Estimated Delivery</th>
+								<td>
+									<?php $date = new DateTime($row['estimatedDelivery']);
+									echo $date->format('d/m/Y'); ?>
+								</td>
+						</tr>
+					</tbody>
+				</table>
+			<p align="center">
+				<?php if ($admin) { ?>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#weightSizeModal">Update Weight and Size</button>
+				<?php } ?>
+				<a class="btn btn-success" href="<?php echo $previous ?>" role="button">Done</a>
+			</p>
+		</div>
+		</div>			
 
         <!-- Modal -->
         <div id="weightSizeModal" class="modal fade" role="dialog">
@@ -214,5 +208,8 @@
                 </div>
             </div>
         </div>
-<?php 
-    include"tail.php";
+	<?php 
+		include"tail.php";
+	 ?>
+  </body>
+</html>
