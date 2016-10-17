@@ -17,9 +17,22 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, orders.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority FROM orders JOIN customers ON orders.accountNo = customers.accountNo WHERE status = 'Ready For Pickup' ;";
-            $result = $db->getArrayOfValues($sqlSt);
-            if (isset($result)) {
+			if ($_SESSION['accountType'] == "Driver") {
+				$sqlSt = "SELECT orderNo, drivers.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority 
+							FROM orders 
+							JOIN customers ON orders.accountNo = customers.accountNo 
+							JOIN drivers ON orders.driver = drivers.driverNo 
+							WHERE status = 'Ready For Pickup' AND drivers.accountNo = ".$_SESSION['accountNo']. "
+							ORDER BY orderDate ASC;";
+			} else if ($_SESSION['accountType'] == "Owner") {
+				$sqlSt = "SELECT orderNo, orders.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority 
+							FROM orders 
+							JOIN customers ON orders.accountNo = customers.accountNo 
+							WHERE status = 'Ready For Pickup' 
+							ORDER BY orderDate ASC;";
+            }
+			$result = $db->getArrayOfValues($sqlSt);
+            if (!empty($result)) {
                 $formId = 0;
                 foreach($result as $row){ ?>
                     <div class="container">
@@ -77,11 +90,15 @@
                  <?php
                  $formId++;
                 }//end forEach
-            }
-            else{
-                echo "0 results";
-            }
-        ?>
+            } else { ?>
+                <div class="container">
+					<div class="row" style="margin-top:25px">
+						<div class="col-md-6 col-md-offset-3">
+							<h1 class="text-center">No Pickups Available</h1>
+						</div>
+					</div>
+				</div>
+           <?php } ?>
         <?php
             include "tail.php";
         ?>

@@ -23,6 +23,7 @@ $owner = array(
   'deliveries'  => array('text'=>'Deliveries',  'url'=>'/delivery.php'),
   'pickups'  => array('text'=>'Pick-Ups',  'url'=>'/pickups.php'),
   'records'  => array('text'=>'Records',  'url'=>'/records.php'),
+  'drivers'  => array('text'=>'Drivers',  'url'=>'/drivers.php'),
 );
 
 function statusOfDeliveryForDriver($deliveryDate,$status){

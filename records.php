@@ -10,7 +10,7 @@
 <html>
     <?php
         include "head.php"
-    ?>
+    ?>	
     <body>
         <?php
             include 'navbar.php';
@@ -37,7 +37,7 @@
 									<?php 
 									for ($i = count($result) - 1; $i >= 0; $i--) { 
 									$row = $result[$i];?>									
-									<tr class='clickable-row' data-href="orderDetails.php?order=<?php echo $row['orderNo']; ?>">
+									<tr style="cursor: pointer;" onclick="location.href='orderDetails.php?order=<?php echo $row['orderNo']; ?>';">
 										<td>#<?php echo $row['orderNo']; ?></td>
 										<td>#<?php echo $row['accountNo']; ?></td>
 										<td><?php 

@@ -17,69 +17,87 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, status, orderDate, driver, receiversName, priority FROM orders WHERE status NOT IN ('Complete', 'Cancelled', 'Pending', 'Ready For Pickup') ;";
+			if ($_SESSION['accountType'] == "Driver") {
+				$sqlSt = "SELECT orderNo, drivers.accountNo, destination, status, orderDate, driver, receiversName, priority, estimatedDelivery
+							FROM orders 
+							JOIN customers ON orders.accountNo = customers.accountNo 
+							JOIN drivers ON orders.driver = drivers.driverNo 
+							WHERE status NOT IN ('Complete', 'Cancelled', 'Pending', 'Ready For Pickup') AND drivers.accountNo = ".$_SESSION['accountNo']. "
+							ORDER BY estimatedDelivery ASC;";
+			} else if ($_SESSION['accountType'] == "Owner") {
+				$sqlSt = "SELECT orderNo, destination, status, orderDate, driver, receiversName, priority, estimatedDelivery 
+							FROM orders 
+							JOIN customers ON orders.accountNo = customers.accountNo 
+							WHERE status NOT IN ('Complete', 'Cancelled', 'Pending', 'Ready For Pickup') 
+							ORDER BY estimatedDelivery ASC;";
+            }
             $result = $db->getArrayOfValues($sqlSt);
-            if (isset($result)) {
+            if (!empty($result)) {
                 $formId = 0;
                 foreach($result as $row){ ?>
 				<div class="container">
-                        <div class="row" style="margin-top:25px">
-							<div class="col-md-6 col-md-offset-3">
-                                <div class="panel-group">
-                                    <div class="panel panel-<?php $orderDate = new DateTime($row['orderDate']); echo statusOfDeliveryForDriver($orderDate,$row["status"])?>">
-                                        <div class="panel-heading">
-                                            Order #<?php echo $row['orderNo']; ?>
-                                        </div>
-                                        <div class="panel-body">
-											<table class="table table-condensed table-borderless">	
-												<tbody>
-													<tr>
-														<th>Driver</th>
-															<td class="col-md-6"><?php if (!empty($row['driver'])) {
-																echo "#" . $row['driver'];
-															} else {
-																echo "NO DRIVER ASSIGNED";
-															}
-															 ?></td>
-													</tr>
-													<tr>
-														<th>Recipient</th>
-															<td><?php echo $row['receiversName']; ?></td>
-													</tr>
-													<tr>
-														<th>Destination</th>
-															<td><?php echo $row['destination']; ?></td>
-													</tr>
-													<tr>
-														<th>Status</th>
-															<td><?php echo $row['status']; ?></td>
-													</tr>
-													<tr>
-														<th>Priority</th>
-															<td><?php echo priority($row['priority']); ?></td>
-													</tr>
-													<tr>
-														<th>Estimated Delivery</th>
-															<td><?php $date = new DateTime($row['estimatedDelivery']);
-																echo $date->format('d/m/Y'); ?></td>
-													</tr>
-												</tbody>
-											</table>
-											<div class="pull-right">
-												<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>
-											</div>
+					<div class="row" style="margin-top:25px">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="panel-group">
+								<div class="panel panel-<?php $orderDate = new DateTime($row['orderDate']); echo statusOfDeliveryForDriver($orderDate,$row["status"])?>">
+									<div class="panel-heading">
+										Order #<?php echo $row['orderNo']; ?>
+									</div>
+									<div class="panel-body">
+										<table class="table table-condensed table-borderless">	
+											<tbody>
+												<tr>
+													<th>Driver</th>
+														<td class="col-md-6"><?php if (!empty($row['driver'])) {
+															echo "#" . $row['driver'];
+														} else {
+															echo "NO DRIVER ASSIGNED";
+														}
+														 ?></td>
+												</tr>
+												<tr>
+													<th>Recipient</th>
+														<td><?php echo $row['receiversName']; ?></td>
+												</tr>
+												<tr>
+													<th>Destination</th>
+														<td><?php echo $row['destination']; ?></td>
+												</tr>
+												<tr>
+													<th>Status</th>
+														<td><?php echo $row['status']; ?></td>
+												</tr>
+												<tr>
+													<th>Priority</th>
+														<td><?php echo priority($row['priority']); ?></td>
+												</tr>
+												<tr>
+													<th>Estimated Delivery</th>
+														<td><?php $date = new DateTime($row['estimatedDelivery']);
+															echo $date->format('d/m/Y'); ?></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="pull-right">
+											<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>
 										</div>
-                                    </div>
-                                </div>
+									</div>
+								</div>
 							</div>
-                        </div>
-					</div>
+						</div>
+                    </div>
+				</div>
                  <?php	}//end forEach
-            }
-            else{
-                echo "0 results";
-            }
-        ?>
+            } else { ?>
+				<div class="container">
+					<div class="row" style="margin-top:25px">
+						<div class="col-md-6 col-md-offset-3">
+							<h1 class="text-center">No Deliveries Available</h1>
+						</div>
+					</div>
+				</div>
+           <?php }?>
+
         <?php
             include "tail.php";
         ?>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner" || $_SESSION["accountType"]=="Driver")){
+    if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner")){
     }
     else{
         header("Location:index.php");
@@ -17,7 +17,10 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate, estimatedDelivery FROM orders WHERE driver IS NULL AND status = 'Pending';";
+            $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate, estimatedDelivery 
+						FROM orders 
+						WHERE driver IS NULL AND status = 'Pending'
+						ORDER BY estimatedDelivery ASC;";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
                 $formId = 0;
@@ -64,8 +67,8 @@
 															<span class="caret"></span>
 														</button>
 														<ul class="btn-space dropdown-menu">
-															<li><a onclick="submitForm(<?php echo $formId; ?>,'2', 'driver')">Driver 1</a></li>
-															<li><a onclick="submitForm(<?php echo $formId; ?>,'3', 'driver')">Driver 2</a></li>
+															<li><a onclick="submitForm(<?php echo $formId; ?>,'1', 'driver')">Driver 1</a></li>
+															<li><a onclick="submitForm(<?php echo $formId; ?>,'2', 'driver')">Driver 2</a></li>
 														</ul>
 														<input id = <?php echo '"driver'."$formId".'"'; ?> type="hidden" value="RFP" name = "driver">
 														<input type = "hidden" value = <?php echo '"'.$row["orderNo"].'"';?> name = "orderNumber">
