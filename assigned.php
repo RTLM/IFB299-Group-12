@@ -45,7 +45,7 @@
     												<button class="btn btn-primary btn-space dropdown dropdown-toggle" type="button" data-toggle="dropdown">Update Status
     													<span class="caret"></span>
     												</button>
-    												<ul class="btn-space dropdown-menu dropdown-menu-right">
+    												<ul class="btn-space dropdown-menu">
     													<li><a onclick="submitForm(<?php echo $formId; ?>,'Ready For Pickup', 'status')">Ready for Pickup</a></li>
     													<li><a onclick="submitForm(<?php echo $formId; ?>,'On Way to Warehouse', 'status')">On Way to Warehouse</a></li>
     													<li><a onclick="submitForm(<?php echo $formId; ?>,'At Warehouse', 'status')">At Warehouse</a></li>

@@ -104,17 +104,7 @@
 							<tr>
 								<th>Priority</th>
 									<td><?php
-										switch ($row['priority']) {
-											case 1:
-												echo "Overnight";
-												break;
-											case 2:
-												echo "Express";
-												break;
-											case 3:
-												echo "Standard";
-												break;
-										} ?>
+										echo priority($row['priority']); ?>
 									</td>
 							</tr>
 							<tr>

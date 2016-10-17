@@ -82,6 +82,21 @@ function updateNav($account) {
 	return $html;
 }
 
+function priority($priority) {
+	switch ($priority) {
+		case 1:
+			$string = "Overnight";
+			break;
+		case 2:
+			$string =  "Express";
+			break;
+		case 3:
+			$string =  "Standard";
+			break;
+	}
+	return $string;
+}
+
 function packageCost($priority, $size, $weight) {
 	$cost = 0;
 	switch ($priority) {
