@@ -45,17 +45,14 @@
                                             date_add($date, date_interval_create_from_date_string('5 weekdays'));
                                             echo $date->format('d/m/Y'); ?>
                                         </div>
-										<?php
-											if ($row['status'] == 'Pending') {
-										?>
-										<form action = "markCancelled.php" method="post" name="statusMarker">
-                                            <div class="btn-container-right">
-                                                <button type="submit" name="statusCancel" value=<?php echo $row['orderNo']; ?> class="btn btn-danger btn-space">Cancel Order</button>				
-                                            </div>
-                                        </form>
-										<?php
-											}
-										?>
+										<div class="btn-container-right">
+											<form action = "markCancelled.php" method="post" name="statusMarker">
+                                                <a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>					
+												<?php if ($row['status'] == 'Pending') { ?>
+												<button type="submit" name="statusCancel" value=<?php echo $row['orderNo']; ?> class="btn btn-danger btn-space">Cancel Order</button>				
+												<?php } ?>
+											</form>
+										</div>						
                                     </div>
                                 </div>
                             </div>

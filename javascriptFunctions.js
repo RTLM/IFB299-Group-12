@@ -8,9 +8,13 @@ contains javascript functions.
 @param:formId-> ID of form to submit.
 @param:status-> Status of Package.
 @author: Navjot Singh Dhaliwal
+
+Version 1.1 
+Allowed for general use of function
+@author: Joshua Russell-Ahern
 */
-function submitForm(formId,status){
-	document.getElementById("status"+formId).value = ""+status;
+function submitForm(formId, item, columm){
+	document.getElementById(columm+formId).value = ""+item;
 	document.getElementById("form"+formId).submit();
 }
 

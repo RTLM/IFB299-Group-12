@@ -1,11 +1,18 @@
 <?php
-	include 'connect.php';
-	$id = htmlspecialchars($_POST['statusComplete']);
-	$sql = "UPDATE orders SET status='Complete' WHERE orderNo='$id'";
-	if ($conn->query($sql) === TRUE) {
-			echo "New record created successfully";
-		} else {
-			echo "Error: " . $sql . "<br>" . $conn->error;
-		}
-	header("location:delivery.php");
-	?>
+include "database.php";
+if(isset($_POST["status"])){
+    $db = new database;
+    $db->connectToDatabase();
+    $status = htmlspecialchars($_POST["status"]);
+    echo "<script>console.log('$status')</script>";
+    $orderNumber = htmlspecialchars($_POST["orderNumber"]);
+    $sql = "UPDATE `orders` SET `status`='$status' WHERE `orderNo`='$orderNumber';";
+    if($db->runASqlQuery($sql)){
+        header("Location:" . $_SERVER['HTTP_REFERER']);
+    }
+    else{
+        header("Location:error.php");
+    }
+}
+
+?>
