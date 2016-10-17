@@ -13,8 +13,10 @@ include 'database.php';
                     $_SESSION["emailId"] = $user["emailId"];
                     $_SESSION["accountNo"] = $user["accountNo"];
                     $_SESSION["accountType"] = $user["accountType"];
-					if ($_SESSION["accountType"] == "Owner" || $_SESSION["accountType"] == "Driver") {
-						header("Location:delivery.php");
+					if ($_SESSION["accountType"] == "Owner") {
+						header("Location:unassigned.php");
+					} else if ($_SESSION["accountType"] == "Driver") {
+						header("Location:assigned.php");
 					} else {
 						header("Location:index.php");
 					}

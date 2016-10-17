@@ -8,10 +8,21 @@ include 'PHPfunctions.php';
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.php">On The Spot</a>
+        <a class="navbar-brand" href=<?php 
+		switch ($_SESSION["accountType"]) {
+			case "Customer":
+				echo "index.php";
+				break;
+			case "Driver":
+				echo "assigned.php";
+				break;
+			case "Owner":
+				echo "unassigned.php";
+				break;
+		}
+		?>>On The Spot</a>
       </div>
-      <div id="navbar" class="navbar-collapse collapse">
-	  	  
+      <div id="navbar" class="navbar-collapse collapse">	  	  
             <ul class="nav navbar-nav">
 			<?php 
 				echo updateNav($_SESSION['accountType']);
