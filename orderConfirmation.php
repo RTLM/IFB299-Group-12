@@ -8,6 +8,7 @@
     $receiversName = htmlspecialchars($_POST['receiversname']);
     $pickup = htmlspecialchars($_POST['pickup']);
 	$priority = htmlspecialchars($_POST['priority']);
+	$valuable = htmlspecialchars($_POST['valuable']);
     $status = "Pending";
     $date = date("Y-m-d");
     $id = $_SESSION['accountNo'];
@@ -26,7 +27,8 @@
 	$estimatedDelivery = date_format($prioritydate, 'Y-m-d');
 	$size = htmlspecialchars($_POST['size']);
 	$weight = htmlspecialchars($_POST['weight']);
-    $sql = "insert into orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority, size, weight) values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimatedDelivery', '$priority', '$size', '$weight');";
+    $sql = "INSERT INTO orders(accountNo, destination, pickup, receiversName, receiversContact, status, orderDate, estimatedDelivery, priority, size, weight, valuable) 
+			values('$accountNo','$destination','$pickup','$receiversName','$receiversContact','$status','$date','$estimatedDelivery', '$priority', '$size', '$weight', '$valuable');";
 	$_SESSION["orderSQL"] = $_SESSION["orderSQL"].$sql;
     ?>
 <!DOCTYPE html>
@@ -83,6 +85,19 @@
 									break;
 								case 3:
 									echo "Standard";
+									break;
+							}
+						?></p>
+                  </div>
+				  <div class="form-group">
+                        <label for="valuable">Signature Required:</label>
+                        <p class="form-control-static"><?php 
+							switch ($valuable) {
+								case 'FALSE':
+									echo "No";
+									break;
+								case "TRUE":
+									echo "Yes";
 									break;
 							}
 						?></p>

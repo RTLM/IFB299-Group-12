@@ -59,6 +59,13 @@
 							<option value="1">Overnight (1 Working Day)</option>
 						</select>
 					</div>
+					<div class="form-group">
+						<label for="valuable">Signature Required?</label>
+						<select class="form-control" id="valuable" name="valuable">
+							<option value="FALSE">No</option>
+							<option value="TRUE">Yes</option>
+						</select>
+					</div>
 					 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
