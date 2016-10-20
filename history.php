@@ -10,15 +10,22 @@
     <?php
         include "head.php"
     ?>
-    <body onload = "clickElement('completed')">
+    <body onload = "clickElement('pending')">
 	<?php
         include 'navbar.php';
 	?>
         
-    <div class="horizontal-center">
-    <input id = "completed" onclick = "hideElements(1);" type="radio" name="vehicle" value="Bike">Completed
-    <input id = "pending" onclick = "hideElements(2);" type="radio" name="vehicle" value="Bike">Pending
+
+
 	<h2 class="text-center">Order History</h2>
+	<div class="container">
+		<div class="col-md-2 col-md-offset-5">
+			<div class="input-group">
+				<input id = "pending" onclick = "hideElements(2);" type="radio" name="vehicle" value="Bike">Pending</input>
+				<input id = "completed" onclick = "hideElements(1);" type="radio" name="vehicle" value="Bike">Completed</input>
+			</div>
+		</div>
+	</div>
 		<?php
             include 'database.php';
             $db = new database;
@@ -28,35 +35,42 @@
             if (isset($result)) {
                 foreach($result as $row){
 					if ($row['status'] != 'Cancelled') {?>
-                        <div name = <?php echo '"'.$row['status'].'"' ?> class="row">
-                            <div class="col-md-30">
-                                <div class="panel-group">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            Order #<?php echo $row['orderNo']; ?>
-                                        </div>
-                                        <div class="panel-body">
-                                            Sent To: <?php echo $row['receiversName']; ?><br>
-                                            Destination: <?php echo $row['destination']; ?><br>
-                                            Sent From: <?php echo $row['pickUp']; ?><br>
-                                            Status: <?php echo $row['status']; ?><br>
-                                            Estimated Delivery: <?php 
-                                            $date = new DateTime($row['orderDate']);
-                                            date_add($date, date_interval_create_from_date_string('5 weekdays'));
-                                            echo $date->format('d/m/Y'); ?>
-                                        </div>
-										<div class="btn-container-right">
-											<form action = "markCancelled.php" method="post" name="statusMarker">
-                                                <a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>					
-												<?php if ($row['status'] == 'Pending') { ?>
-												<button type="submit" name="statusCancel" value=<?php echo $row['orderNo']; ?> class="btn btn-danger btn-space">Cancel Order</button>				
-												<?php } ?>
-											</form>
-										</div>						
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+				<div class="container" name = <?php echo '"'.$row['status'].'"' ?>>
+					<div class="row" style="margin-top:25px">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="panel-group">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										Order #<?php echo $row['orderNo']; ?>
+									</div>
+									<div class="panel-body">
+										<table class="table table-condensed table-borderless">	
+											<tbody>
+												<tr>
+													<th>Recipient</th>
+														<td class="col-md-6"><?php echo $row['receiversName']; ?></td>
+												</tr>
+												<tr>
+													<th>Status</th>
+														<td><?php echo $row['status']; ?></td>
+												</tr>
+												<tr>
+													<th>Estimated Delivery</th>
+														<td><?php $date = new DateTime($row['estimatedDelivery']);
+															echo $date->format('d/m/Y'); ?></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="pull-right">
+											<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+				</div>
+                       
                  <?php 
 					}
                 }//end forEach
@@ -65,7 +79,7 @@
                 echo "0 results";
             }
         ?>
-		</div>
+
         <?php 
             include "tail.php";
         ?>
