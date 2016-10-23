@@ -71,7 +71,15 @@
 											</tbody>
 										</table>
 										<div class="pull-right">
-											<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>
+											<?php if($row['status'] == "Pending") {?>
+											<form class="div-inline" action="markCancelled.php" method="post">
+											<div class="form-group">
+												<input type="hidden" name="orderNo" value=<?php echo $row['orderNo']; ?> />
+											</div>
+											<button type="submit" name="submit" class="btn btn-danger btn-space">Cancel Order</button>
+											</form>
+											<?php } ?>
+											<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>														
 										</div>
 									</div>
 								</div>

@@ -4,7 +4,7 @@
 	include 'database.php';			
 	$db = new database;
 	$db->connectToDatabase();
-	$sql = ("SELECT orders.accountNo, firstName, lastName, address, orderNo, size, weight, destination, receiversName, driver, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName, estimatedDelivery, priority, paid, paymentType, valuable, dateReady, datePickUp, dateWarehouse, dateDelivery, dateComplete FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
+	$sql = ("SELECT orders.accountNo, firstName, lastName, address, orderNo, size, weight, destination, receiversName, driver, receiversContact, receiver, status, pickUp, orderDate, contactNo, firstName, lastName, estimatedDelivery, priority, paid, paymentType, valuable, dateReady, datePickUp, dateWarehouse, dateDelivery, dateComplete FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
 	$result = $db->getArrayOfValues($sql);
 	$row = $result[0];
 	if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner" || $_SESSION["accountType"]=="Driver")){
@@ -184,6 +184,10 @@
 						<tr>
 							<th>Order Complete</th>
 								<td class="col-md-6"><?php if(isset($row['dateComplete'])) { $date = new DateTime($row['dateComplete']); echo $date->format('d/m/Y h:i A'); } else { echo "-"; }?></td>
+						</tr>
+						<tr>
+							<th>Signed For By</th>
+								<td class="col-md-6"><?php if(isset($row['receiver'])) { echo $row['receiver']; } else { echo "-"; }?></td>
 						</tr>
 					</tbody>
 				</table>
