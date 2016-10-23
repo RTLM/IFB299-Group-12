@@ -63,11 +63,11 @@
     													<span class="caret"></span>
     												</button>
     												<ul class="btn-space dropdown-menu">
-    													<li><a onclick="submitForm(<?php echo $formId; ?>,'Ready For Pickup', 'status')">Ready for Pickup</a></li>
-    													<li><a onclick="submitForm(<?php echo $formId; ?>,'On Way to Warehouse', 'status')">On Way to Warehouse</a></li>
-    													<li><a onclick="submitForm(<?php echo $formId; ?>,'At Warehouse', 'status')">At Warehouse</a></li>
-    													<li><a onclick="submitForm(<?php echo $formId; ?>,'With Driver For Delivery', 'status')">With Driver For Delivery</a></li>
-    													<li><a onclick="submitForm(<?php echo $formId; ?>,'Complete', 'status')">Complete</a></li>
+    													<li><a onclick="updateStatus(<?php echo $formId; ?>,'Ready For Pickup', 'status', <?php echo $row['orderNo']; ?>)">Ready for Pickup</a></li>
+    													<li><a onclick="updateStatus(<?php echo $formId; ?>,'On Way to Warehouse', 'status', <?php echo $row['orderNo']; ?>)">On Way to Warehouse</a></li>
+    													<li><a onclick="updateStatus(<?php echo $formId; ?>,'At Warehouse', 'status', <?php echo $row['orderNo']; ?>)">At Warehouse</a></li>
+    													<li><a onclick="updateStatus(<?php echo $formId; ?>,'With Driver For Delivery', 'status', <?php echo $row['orderNo']; ?>)">With Driver For Delivery</a></li>
+    													<li><a onclick="updateStatus(<?php echo $formId; ?>,'Complete', 'status', <?php echo $row['orderNo']; ?>)">Complete</a></li>
 												    </ul>
                                                     <input id = <?php echo '"status'."$formId".'"'; ?> type="hidden" value="RFP" name = "status">
                                                     <input type = "hidden" value = <?php echo '"'.$row["orderNo"].'"';?> name = "orderNumber">
