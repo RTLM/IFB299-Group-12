@@ -19,10 +19,15 @@
 
 	<h2 class="text-center">Order History</h2>
 	<div class="container">
-		<div class="col-md-2 col-md-offset-5">
-			<div class="input-group">
-				<input id = "pending" onclick = "hideElements(2);" type="radio" name="vehicle" value="Bike">Pending</input>
-				<input id = "completed" onclick = "hideElements(1);" type="radio" name="vehicle" value="Bike">Completed</input>
+		<div class="col-md-12 text-center">
+			<div class="btn-group">
+				<button class="btn btn-primary btn-space dropdown dropdown-toggle" type="button" data-toggle="dropdown" style="cursor: pointer;">View
+					<span class="caret"></span>
+				</button>
+				<ul class="btn-space dropdown-menu dropdown-menu-right">
+					<li><a style="cursor: pointer;" onclick="hideElements(2);">In Progress</a></li>
+					<li><a style="cursor: pointer;" onclick="hideElements(1);">Completed</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -49,6 +54,10 @@
 												<tr>
 													<th>Recipient</th>
 														<td class="col-md-6"><?php echo $row['receiversName']; ?></td>
+												</tr>
+												<tr>
+												<th>Destination</th>
+														<td class="col-md-6"><?php echo $row['destination']; ?></td>
 												</tr>
 												<tr>
 													<th>Status</th>

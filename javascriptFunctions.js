@@ -16,6 +16,24 @@ Allowed for general use of function
 function submitForm(formId, item, columm){
 	document.getElementById(columm+formId).value = ""+item;
 	document.getElementById("form"+formId).submit();
+	  
+}
+
+/*This function will update status with timestamps
+Built from submitForm function
+@param:formId-> ID of form to submit.
+@param:status-> Status of Package.
+@author: Navjot Singh Dhaliwal & Joshua Russell-Ahern
+*/
+function updateStatus(formId, item, columm, orderNo){
+	$.ajax({
+		method: "GET",
+        url: "updateTimestamp.php",          
+        data: { status: item, orderNo: orderNo}
+    }); 
+	document.getElementById(columm+formId).value = ""+item;
+	document.getElementById("form"+formId).submit();
+	  
 }
 
 /*Simple function to change the cursor type on elements

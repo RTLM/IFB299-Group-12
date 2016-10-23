@@ -4,7 +4,7 @@
 	include 'database.php';			
 	$db = new database;
 	$db->connectToDatabase();
-	$sql = ("SELECT orders.accountNo, firstName, lastName, address, orderNo, size, weight, destination, receiversName, driver, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName, estimatedDelivery, priority, paid, paymentType, valuable FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
+	$sql = ("SELECT orders.accountNo, firstName, lastName, address, orderNo, size, weight, destination, receiversName, driver, receiversContact, status, pickUp, orderDate, contactNo, firstName, lastName, estimatedDelivery, priority, paid, paymentType, valuable, dateReady, datePickUp, dateWarehouse, dateDelivery, dateComplete FROM orders INNER JOIN customers ON orders.accountNo = customers.accountNo WHERE orderNo=" .$_GET['order'].";");
 	$result = $db->getArrayOfValues($sql);
 	$row = $result[0];
 	if($_SESSION["login"]==true && ($_SESSION["accountType"]=="Owner" || $_SESSION["accountType"]=="Driver")){
@@ -159,6 +159,31 @@
 									<?php $date = new DateTime($row['estimatedDelivery']);
 									echo $date->format('d/m/Y'); ?>
 								</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="lead">Time Stamps</p>
+				<table class="table table-striped">	
+					<tbody>	
+						<tr>
+							<th>Processed</th>
+								<td class="col-md-6"><?php if(isset($row['dateReady'])) { $date = new DateTime($row['dateReady']); echo $date->format('d/m/Y h:i A'); } else { echo "-"; }?></td>
+						</tr>
+						<tr>
+							<th>Picked Up</th>
+								<td class="col-md-6"><?php if(isset($row['datePickUp'])) { $date = new DateTime($row['datePickUp']); echo $date->format('d/m/Y h:i A'); } else { echo "-"; }?></td>
+						</tr>
+						<tr>
+							<th>Arrived at Warehouse</th>
+								<td class="col-md-6"><?php if(isset($row['dateWarehouse'])) { $date = new DateTime($row['dateWarehouse']); echo $date->format('d/m/Y h:i A'); } else { echo "-"; }?></td>
+						</tr>
+						<tr>
+							<th>Left for Delivery</th>
+								<td class="col-md-6"><?php if(isset($row['dateDelivery'])) { $date = new DateTime($row['dateDelivery']); echo $date->format('d/m/Y h:i A'); } else { echo "-"; }?></td>
+						</tr>
+						<tr>
+							<th>Order Complete</th>
+								<td class="col-md-6"><?php if(isset($row['dateComplete'])) { $date = new DateTime($row['dateComplete']); echo $date->format('d/m/Y h:i A'); } else { echo "-"; }?></td>
 						</tr>
 					</tbody>
 				</table>
