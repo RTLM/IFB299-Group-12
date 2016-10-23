@@ -26,8 +26,8 @@ $owner = array(
   'drivers'  => array('text'=>'Drivers',  'url'=>'/drivers.php'),
 );
 
-function statusOfDeliveryForDriver($deliveryDate,$status){
-    $now = new DateTime('now');
+function statusOfDeliveryForDriver($deliveryDate){
+    $now = date_create();
     $interval = date_diff($now, $deliveryDate);
 	if ($now < $deliveryDate) {
 		if ($interval->days < 2 && $status != "Complete"){
@@ -111,28 +111,16 @@ function packageCost($priority, $size, $weight) {
 			$cost += 0;
 			break;
 	}
-	switch ($size) {
-		case "small":
-			$cost += 10;
-			break;
-		case "medium":
-			$cost += 15;
-			break;
-		case "large":
-			$cost += 20;
-			break;
-		case "x-large":
-			$cost += 30;
-			break;
-	}
-	if ($weight < 1) {
-		$cost += 5;
-	} else if ($weight < 5) {
-		$cost += 10;
-	} else if ($weight < 10) {
-		$cost += 15;
-	} else {
-		$cost += 20;
+	if ($size == "x-large" || $weight >= 10) {
+		$cost += 25.6;
+	} else if ($size == "large" || weight >= 5) {
+		$cost += 20.05;
+	} else if ($size == "medium" || weight >= 3) {
+		$cost += 17.6;
+	} else if ($size == "small" || weight >= 0.5) {
+		$cost += 13.8;
+	} else if ($size == "envelope") {
+		$cost += 7.6;
 	}
 	return $cost;
 }

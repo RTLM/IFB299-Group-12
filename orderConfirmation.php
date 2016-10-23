@@ -102,7 +102,7 @@
 							}
 						?></p>
                   </div>
-				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo packageCost($_POST['priority'], $_POST['size'], $_POST['weight']); ?></h2>				  
+				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo number_format(packageCost($_POST['priority'], $_POST['size'], $_POST['weight']), 2); ?></h2>				  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                   <a href="order.php" class="btn btn-primary" role="button">Add Order</a>
                   <a href="cancelOrder.php" class="btn btn-danger" role="button">Cancel</a>
