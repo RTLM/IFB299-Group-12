@@ -17,7 +17,7 @@
             include 'database.php';
             $db = new database;
             $db->connectToDatabase();
-            $sqlSt = "SELECT orderNo, drivers.accountNo, destination, status, pickUp, orderDate, driver, estimatedDelivery, valuable
+            $sqlSt = "SELECT orderNo, drivers.accountNo, destination, status, pickUp, orderDate, driver, estimatedDelivery, valuable, paid
 						FROM orders 
 						JOIN drivers ON orders.driver = drivers.driverNo 
 						WHERE drivers.accountNo = ".$_SESSION["accountNo"]." AND status NOT IN ('Cancelled', 'Complete')
@@ -91,7 +91,9 @@
 													</div>
 													<button type="submit" name="submit" class="btn btn-success btn-space">Order Complete</button>
 												</form>
-											<?php } ?>								
+											<?php } if ($row['paid'] == "FALSE") { ?>
+												<button type="button" class="btn btn-danger btn-space" data-toggle="modal" data-target="#paymentModal" data-order=<?php echo $row['orderNo']; ?>>Payment Details</button>
+											<?php } ?>											
 												<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>	
 											</div>											
 										</div>
@@ -147,6 +149,45 @@
 		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 		  var modal = $(this);
 		  modal.find('.modal-title').text('Signature for Valuable Package #' + order);
+		  $(event.currentTarget).find('input[name="orderNo"]').val(order);
+		})
+		</script>
+		
+			<!-- Modal -->
+        <div id="paymentModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Payment for Package</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="updatePayment.php" method="post">	
+                            <div class="form-group">
+                                <label for="paymentType">Payment Type:</label>
+                                <input type="text" class="form-control" id="paymentType" name="paymentType" placeholder="Eftpos, Cash, Cheque...">
+                            </div>
+                            <div class="form-group">
+                            <input type="hidden" name="orderNo" value="" />
+                            </div> 
+                            <div class="modal-footer">
+                                <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script>
+		$('#paymentModal').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget); // Button that triggered the modal
+		  var order = button.data('order'); // Extract info from data-* attributes
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  var modal = $(this);
+		  modal.find('.modal-title').text('Payment for Package #' + order);
 		  $(event.currentTarget).find('input[name="orderNo"]').val(order);
 		})
 		</script>
