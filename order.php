@@ -45,18 +45,19 @@
 						<label for="size">Package Size:</label>
 						<select class="form-control" id="size" name="size">
 							<option hidden value="" selected disabled>Select a Size</option>
-							<option value="Small">Small</option>
-							<option value="Medium">Medium</option>
-							<option value="Large">Large</option>
-							<option value="X-Large">X-Large</option>
+							<option value="Envelope">Envelope (Up to 22cm x 33.5cm)</option>
+							<option value="Small">Small (Up to 20cm&#179;)</option>
+							<option value="Medium">Medium (Up to 35cm&#179;)</option>
+							<option value="Large">Large (Up to 45cm&#179;)</option>
+							<option value="X-Large">X-Large (Up to 70cm&#179;)</option>
 						</select>
 					</div>									
 					<div class="form-group">
 						<label for="priority">Package Priority:</label>
 						<select class="form-control" id="priority" name="priority">
 							<option value="3">Standard (5-7 Working Days)</option>
-							<option value="2">Express (2-4 Working Days)</option>
-							<option value="1">Overnight (1 Working Day)</option>
+							<option value="2">Express (2-4 Working Days) (+$5)</option>
+							<option value="1">Overnight (1 Working Day) (+$10)</option>
 						</select>
 					</div>
 					<div class="form-group">

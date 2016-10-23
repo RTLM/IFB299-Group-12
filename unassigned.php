@@ -19,7 +19,7 @@
             $db->connectToDatabase();
             $sqlSt = "SELECT orderNo, accountNo, destination, status, pickUp, orderDate, estimatedDelivery 
 						FROM orders 
-						WHERE driver IS NULL AND status = 'Pending'
+						WHERE driver IS NULL AND status NOT IN ('Cancelled', 'Complete')
 						ORDER BY estimatedDelivery ASC;";
             $result = $db->getArrayOfValues($sqlSt);
             if (isset($result)) {
@@ -29,7 +29,7 @@
                         <div class="row" style="margin-top:25px">
 							<div class="col-md-6 col-md-offset-3">
                                 <div class="panel-group">
-                                    <div class="panel panel-<?php $orderDate = new DateTime($row['orderDate']); echo statusOfDeliveryForDriver($orderDate,$row["status"])?>">
+                                    <div class="panel panel-<?php $orderDate = new DateTime($row['estimatedDelivery']); echo statusOfDeliveryForDriver($orderDate)?>">
                                         <div class="panel-heading">
                                             Order #<?php echo $row['orderNo']; ?>
                                         </div>

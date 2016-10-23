@@ -17,6 +17,12 @@ body {
 .top17 { margin-top:17px; }
 .top30 { margin-top:30px; }
 
+.div-inline{
+    display: inline-block;
+    
+}
+.center-block {float: none !important}
+
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
