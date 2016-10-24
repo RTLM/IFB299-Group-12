@@ -21,13 +21,8 @@
 	<div class="container">
 		<div class="col-md-12 text-center">
 			<div class="btn-group">
-				<button class="btn btn-primary btn-space dropdown dropdown-toggle" type="button" data-toggle="dropdown" style="cursor: pointer;">View
-					<span class="caret"></span>
-				</button>
-				<ul class="btn-space dropdown-menu dropdown-menu-right">
-					<li><a style="cursor: pointer;" onclick="hideElements(2);">In Progress</a></li>
-					<li><a style="cursor: pointer;" onclick="hideElements(1);">Completed</a></li>
-				</ul>
+				<button class="btn btn-primary " type="button" onclick="hideElements(2,this);" style="cursor: pointer;">In Progress</button>
+				<button class="btn btn-primary " type="button" onclick="hideElements(1, this);" style="cursor: pointer;">Completed</button>
 			</div>
 		</div>
 	</div>

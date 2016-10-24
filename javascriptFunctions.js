@@ -52,10 +52,12 @@ function changeCursorType(cursorType,elementTag){
 /*Simple function to hide elements
 @author:Navjot Singh Dhaliwal
 */
-function hideElements(eventExecutor){
+function hideElements(eventExecutor, button){
 	var completed = 1;
 	var pending = 2;
 	var elements = document.getElementsByTagName('div');
+	$(button).removeClass("disabled").siblings().removeClass("active");
+	$(button).addClass("active").siblings().addClass("disabled");	
 	if(eventExecutor == completed){
 		for(var i = 0; i < elements.length;i++){
 			if(elements[i].getAttribute('name') == "Pending" ||	elements[i].getAttribute('name') == "Ready For Pickup" || elements[i].getAttribute('name') == "With Driver For Delivery" || elements[i].getAttribute('name') == "On Way to Warehouse" ||	elements[i].getAttribute('name') == "At Warehouse"){
