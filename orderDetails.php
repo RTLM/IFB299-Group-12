@@ -196,7 +196,7 @@
 				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#weightSizeModal">Update Weight and Size</button>
 				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#dateModal">Update Estimated Delivery</button>
 				<?php } ?>
-				<a class="btn btn-success" href="<?php echo $previous ?>" role="button">Done</a>
+				<a class="btn btn-success" href="<?php echo $_GET['prev'] ?>.php" role="button">Done</a>
 			</div>
 		</div>
 		</div>			
@@ -220,10 +220,11 @@
                                 <label for="size">Package Size:</label>
 									<select class="form-control" id="size" name="size">
 										<option hidden value="" selected disabled>Select a Size</option>
-										<option value="Small">Small</option>
-										<option value="Medium">Medium</option>
-										<option value="Large">Large</option>
-										<option value="X-Large">X-Large</option>
+										<option value="Envelope">Envelope (Up to 22cm x 33.5cm)</option>
+										<option value="Small">Small (Up to 20cm&#179;)</option>
+										<option value="Medium">Medium (Up to 35cm&#179;)</option>
+										<option value="Large">Large (Up to 45cm&#179;)</option>
+										<option value="X-Large">X-Large (Up to 70cm&#179;)</option>
 									</select>
                             </div>  
                             <div class="form-group">
