@@ -21,8 +21,8 @@
 	<div class="container">
 		<div class="col-md-12 text-center">
 			<div class="btn-group">
-				<button class="btn btn-primary " type="button" onclick="hideElements(2,this);" style="cursor: pointer;">In Progress</button>
-				<button class="btn btn-primary " type="button" onclick="hideElements(1, this);" style="cursor: pointer;">Completed</button>
+				<button class="btn btn-primary active" type="button" onclick="hideElements(2,this);" style="cursor: pointer;">In Progress</button>
+				<button class="btn btn-primary disabled" type="button" onclick="hideElements(1, this);" style="cursor: pointer;">Completed</button>
 			</div>
 		</div>
 	</div>
