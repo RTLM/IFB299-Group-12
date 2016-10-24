@@ -4,11 +4,10 @@ if(isset($_POST["driver"])){
     $db = new database;
     $db->connectToDatabase();
     $driver = htmlspecialchars($_POST["driver"]);
-    echo "<script>console.log('$driver')</script>";
-    $orderNumber = htmlspecialchars($_POST["orderNumber"]);
+    $orderNumber = htmlspecialchars($_POST["orderNo"]);
     $sql = "UPDATE orders SET driver='$driver', status='Ready For Pickup' WHERE orderNo='$orderNumber';";
     if($db->runASqlQuery($sql)){
-        header("Location:unassigned.php");
+        header("Location:". $_SERVER['HTTP_REFERER']);
     }
     else{
         header("Location:error.php");
