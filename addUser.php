@@ -10,5 +10,5 @@
 		$accountType = 'Customer';
                 $db = new database;
                 $db->connectToDatabase();
-                $db->makeAccount($emailId, $address, $contactNumber, $firstName, $lastName, $password, $accountType);
+                $db->makeAccount($emailId, $address, $contact, $firstName, $lastName, $password, $accountType);
 }//end if

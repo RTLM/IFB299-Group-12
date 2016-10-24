@@ -10,6 +10,12 @@
     <body>
         <?php
             include 'navbar.php';
+            include 'database.php';
+            $db = new database;
+            $db->connectToDatabase();
+            $sqlSt = "SELECT address FROM customers WHERE accountNo = ".$_SESSION["accountNo"].";";
+            $result = $db->getArrayOfValues($sqlSt);
+            $row = $result[0];
         ?>
 			<div class="container">
 			<div class="col-md-8 col-md-offset-2" style="background-color:white">
@@ -27,7 +33,7 @@
 					</div>
 					<div class="form-group">
 						<label for="pickup">Pick Up:</label>
-						<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From" onchange="doGeocode('pickup');">
+						<input type="text" class="form-control" id="pickup" name="pickup" value="<?php echo $row['address']?>" onchange="doGeocode('pickup');">
 					</div>
 					<div class="form-group">
 						<label for="receiversname">Receiver's Name:</label>
