@@ -20,26 +20,26 @@
 			<!--<center><img src="padlock-closed2.png" style="width: 25px; height:30px;"></center>-->
 			</div>
 				<div class="col-md-8 col-md-offset-2" style="background-color:#a8aeb7">
-					<form method="POST" action="orderConfirmation.php">
+					<form method="POST" onsubmit="return submitForm2();" action="orderConfirmation.php">
 					<div class="form-group">
 						<label for="destination">Destination:</label>
-						<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To">
+						<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To" onchange ="doGeocode('destination');" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label for="pickup">Pick Up:</label>
-						<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From">
+						<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From" onchange="doGeocode('pickup');">
 					</div>
 					<div class="form-group">
 						<label for="receiversname">Receiver's Name:</label>
-						<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name">
+						<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name" onkeydown="validate('receiversname','name')">
 					</div>
 					<div class="form-group">
 						<label for="receiverscontact">Receiver's Contact Number:</label>
-						<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number">
+						<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number" onkeydown="validate('receiverscontact','number');">
 					</div>
 					<div class="form-group">
 						<label for="weight">Package Weight (Kgs):</label>
-						<input type="text" class="form-control" id="weight" name="weight" placeholder="Package Weight in Kilograms">
+						<input type="text" class="form-control" id="weight" name="weight" placeholder="Package Weight in Kilograms" onkeydown="validate('weight','weight');">
 					</div>	
 					<div class="form-group">
 						<label for="size">Package Size:</label>
