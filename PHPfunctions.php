@@ -3,6 +3,7 @@
 $guest = array(
   'home'  => array('text'=>'Home',  'url'=>'/index.php'),
   'about' => array('text'=>'About', 'url'=>'/about.php'),
+  'calculator' => array('text'=>'Calculator', 'url'=>'/calculator.php'),
 );
 
 $customer = array(
@@ -10,6 +11,7 @@ $customer = array(
   'order'  => array('text'=>'Order',  'url'=>'/order.php'),
   'history' => array('text'=>'History', 'url'=>'/history.php'),
   'about' => array('text'=>'About', 'url'=>'/about.php'),
+  'calculator' => array('text'=>'Calculator', 'url'=>'/calculator.php'),
 );
 
 $driver = array(
