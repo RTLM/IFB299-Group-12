@@ -19,7 +19,7 @@
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
     <script type="text/javascript" src = "javascriptFunctions.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmPZXpdzOimzRXzAV6WrHoorT4tZSGEaY" sync></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmPZXpdzOimzRXzAV6WrHoorT4tZSGEaY" sync></script>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
