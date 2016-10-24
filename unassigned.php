@@ -72,7 +72,7 @@
 														</ul>
 														<input id = <?php echo '"driver'."$formId".'"'; ?> type="hidden" value="RFP" name = "driver">
 														<input type = "hidden" value = <?php echo '"'.$row["orderNo"].'"';?> name = "orderNumber">
-														<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>
+														<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>&prev=unassigned" class="btn btn-info btn-space" name role="button">Order Details</a>
 													</div>
 												</div>
 											</form>											

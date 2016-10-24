@@ -11,6 +11,6 @@
                 UPDATE orders SET size = '$size', weight = '$weight' WHERE `orderNo` = '$orderNo';
                 ";
                 $db->runASqlQuery($updateWeightSize);
-	header("location:orderDetails.php?order=$orderNo");
+	header("location:" . $_SERVER['HTTP_REFERER']);
 	exit;
         }

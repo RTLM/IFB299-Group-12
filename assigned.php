@@ -94,7 +94,7 @@
 											<?php } if ($row['paid'] == "FALSE") { ?>
 												<button type="button" class="btn btn-danger btn-space" data-toggle="modal" data-target="#paymentModal" data-order=<?php echo $row['orderNo']; ?>>Payment Details</button>
 											<?php } ?>											
-												<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>	
+												<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>&prev=assigned" class="btn btn-info btn-space" name role="button">Order Details</a>	
 											</div>											
 										</div>
                                     </div>

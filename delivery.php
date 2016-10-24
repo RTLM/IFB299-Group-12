@@ -79,7 +79,7 @@
 											</tbody>
 										</table>
 										<div class="pull-right">
-											<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>" class="btn btn-info btn-space" name role="button">Order Details</a>
+											<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>&prev=delivery" class="btn btn-info btn-space" name role="button">Order Details</a>
 										</div>
 									</div>
 								</div>
