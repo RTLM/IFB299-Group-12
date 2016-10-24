@@ -71,7 +71,7 @@
 															<li><a onclick="submitForm(<?php echo $formId; ?>,'2', 'driver')">Driver 2</a></li>
 														</ul>
 														<input id = <?php echo '"driver'."$formId".'"'; ?> type="hidden" value="RFP" name = "driver">
-														<input type = "hidden" value = <?php echo '"'.$row["orderNo"].'"';?> name = "orderNumber">
+														<input type = "hidden" value = <?php echo '"'.$row["orderNo"].'"';?> name = "orderNo">
 														<a href="orderDetails.php?order=<?php echo $row['orderNo']; ?>&prev=unassigned" class="btn btn-info btn-space" name role="button">Order Details</a>
 													</div>
 												</div>

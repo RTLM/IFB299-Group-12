@@ -193,13 +193,56 @@
 				</table>
 			<div class="text-center">
 				<?php if ($admin) { ?>
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#weightSizeModal">Update Weight and Size</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#weightSizeModal">Update Weight and Size</button>				
+				<?php }
+				if ($_SESSION['accountType'] == "Owner") { ?>
 				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#dateModal">Update Estimated Delivery</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#driverModal">Reassign Driver</button>
+				<?php if ($row['status'] != "Cancelled" && $row['status'] != "Complete") { ?>
+				<form class="div-inline" action="markCancelled.php" method="post">
+					<div class="form-group">
+						<input type="hidden" name="orderNo" value=<?php echo $row['orderNo']; ?> />
+					</div>
+					<button type="submit" name="submit" class="btn btn-danger">Cancel Order</button>
+				</form>
+				<?php } ?>
 				<?php } ?>
 				<a class="btn btn-success" href="<?php echo $_GET['prev'] ?>.php" role="button">Done</a>
 			</div>
 		</div>
-		</div>			
+		</div>
+		
+		<!-- Modal -->
+        <div id="driverModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Estimated Delivery Date</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="assignDriver.php" method="post">	
+                            <div class="form-group">
+                                <label for="driver">Select Driver:</label>
+									<select class="form-control" id="driver" name="driver">
+										<option hidden value="" selected disabled>Select Driver</option>
+										<option value="1">Driver 1</option>
+										<option value="2">Driver 2</option>
+									</select>
+                            </div>
+                            <div class="form-group">
+                            <input type="hidden" value=<?php echo $row['orderNo']; ?> name="orderNo" />
+                            </div> 
+                            <div class="modal-footer">
+                                <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+		</div>
 
         <!-- Modal -->
         <div id="weightSizeModal" class="modal fade" role="dialog">
