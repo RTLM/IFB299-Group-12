@@ -11,7 +11,7 @@
                 ";
                 $db->runASqlQuery($updateDate);
 	}
-	header("location:orderDetails.php?order=$orderNo");
+	header("location:" . $_SERVER['HTTP_REFERER']);
 	exit;
 	
 	?>
