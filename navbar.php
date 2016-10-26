@@ -17,6 +17,10 @@ include 'PHPfunctions.php';
       case "Owner":
         echo "unassigned.php";
         break;
+      default:{
+        echo "index.php";
+        break;
+      }
     }
     ?>>On The Spot</a>
       </div>
