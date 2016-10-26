@@ -23,13 +23,13 @@
 							JOIN customers ON orders.accountNo = customers.accountNo 
 							JOIN drivers ON orders.driver = drivers.driverNo 
 							WHERE status = 'Ready For Pickup' AND drivers.accountNo = ".$_SESSION['accountNo']. "
-							ORDER BY orderDate ASC;";
+							ORDER BY estimatedDelivery ASC;";
 			} else if ($_SESSION['accountType'] == "Owner") {
 				$sqlSt = "SELECT orderNo, orders.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority, estimatedDelivery
 							FROM orders 
 							JOIN customers ON orders.accountNo = customers.accountNo 
 							WHERE status = 'Ready For Pickup' 
-							ORDER BY orderDate ASC;";
+							ORDER BY estimatedDelivery ASC;";
             }
 			$result = $db->getArrayOfValues($sqlSt);
             if (!empty($result)) {
