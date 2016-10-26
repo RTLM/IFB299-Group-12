@@ -57,19 +57,19 @@
                     </div>
                     <div class="form-group">
                           <label for="contact">Contact Number:</label>
-                          <input <?php if($error){echo"value='$contact'";}?>type="tel" class="form-control" id="contact" name="contact" placeholder="Contact Phone Number">
+                          <input <?php if($error){echo"value='$contact'";}?>type="tel" class="form-control" id="contact" name="contact" placeholder="Contact Phone Number" onkeydown="validate('contact','number');">
                     </div>
                     <div class="form-group">
                           <label for="address">Address:</label>
-                          <input <?php if($error){echo"value='$address'";}?>type="text" class="form-control" id="address" name="address" placeholder="Home/Work Address">
+                          <input <?php if($error){echo"value='$address'";}?>type="text" class="form-control" id="address" name="address" onchange ="doGeocode('address');" placeholder="Home/Work Address">
                     </div>
                     <div class="form-group">
                           <label for="firstname">First Name:</label>
-                          <input <?php if($error){echo"value='$firstName'";}?>type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+                          <input <?php if($error){echo"value='$firstName'";}?>type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" onkeydown="validate('firstname','name')">
                     </div>
                     <div class="form-group">
                           <label for="lastname">Last Name:</label>
-                          <input <?php if($error){echo"value='$lastName'";}?>type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+                          <input <?php if($error){echo"value='$lastName'";}?>type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" onkeydown="validate('lastname','name')">
                     </div>	  
                     <button id="submit" name="submit" type="submit" value="Add Customer" class="btn btn-primary">Submit</button>
 
