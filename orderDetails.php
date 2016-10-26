@@ -76,7 +76,7 @@
 							<th>Size</th>
 								<td><?php 
 									if(!empty($row['size'])) { 
-										echo $row['size'];
+										echo ucfirst($row['size']);
 									} else { 
 										echo '-' ;}; 
 								?></td>

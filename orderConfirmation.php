@@ -71,7 +71,7 @@
                   </div>
 				  <div class="form-group">
                         <label for="size">Package Size:</label>
-                        <p class="form-control-static"><?php echo $_POST['size']; ?></p>
+                        <p class="form-control-static"><?php echo ucfirst($_POST['size']); ?></p>
                   </div>				  
                   <div class="form-group">
                         <label for="priority">Package Priority:</label>
