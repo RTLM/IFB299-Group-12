@@ -241,7 +241,10 @@ append the formatted address to the given element.
 function doGeocode(id){
   	var addr = document.getElementById(id);
 	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({'address': addr.value, 'region' : 'aus', 'componentRestrictions' : {country: 'AU'}}, function(results, status){
+	geocoder.geocode({'address': addr.value, 
+						'region' : 'aus', 
+						'bounds': new google.maps.LatLngBounds(new google.maps.LatLng( -27.657579, 152.692471), new google.maps.LatLng( -27.184346, 153.277443)),
+						'componentRestrictions' : {country: 'AU'}}, function(results, status){
 	    if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
 	    	changeProperty(id,"color",true);
 	    	document.getElementById(id).value = results[0].formatted_address;
