@@ -18,14 +18,14 @@
             $db = new database;
             $db->connectToDatabase();
 			if ($_SESSION['accountType'] == "Driver") {
-				$sqlSt = "SELECT orderNo, drivers.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority 
+				$sqlSt = "SELECT orderNo, drivers.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority, estimatedDelivery
 							FROM orders 
 							JOIN customers ON orders.accountNo = customers.accountNo 
 							JOIN drivers ON orders.driver = drivers.driverNo 
 							WHERE status = 'Ready For Pickup' AND drivers.accountNo = ".$_SESSION['accountNo']. "
 							ORDER BY orderDate ASC;";
 			} else if ($_SESSION['accountType'] == "Owner") {
-				$sqlSt = "SELECT orderNo, orders.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority 
+				$sqlSt = "SELECT orderNo, orders.accountNo, firstName, lastName, status, pickUp, orderDate, driver, priority, estimatedDelivery
 							FROM orders 
 							JOIN customers ON orders.accountNo = customers.accountNo 
 							WHERE status = 'Ready For Pickup' 
