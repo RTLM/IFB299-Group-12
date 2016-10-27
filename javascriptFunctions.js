@@ -27,7 +27,10 @@ function submitForm2(formId){
 Built from submitForm function
 @param:formId-> ID of form to submit.
 @param:status-> Status of Package.
-@author: Navjot Singh Dhaliwal & Joshua Russell-Ahern
+@author: Navjot Singh Dhaliwal
+Version 1.1 
+Added timestamps
+@author: Joshua Russell-Ahern
 */
 function updateStatus(formId, item, columm, orderNo){
 	$.ajax({
