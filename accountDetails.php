@@ -26,7 +26,12 @@
   <body>
 	<?php
 	include('navbar.php');
+	if ($_GET['pwd'] == "fail") { ?>
+		<h2 class="text-center">Password change failed - Password did not match</h2>
+	<?php } else if ($_GET['pwd'] == "success") {
 	?>
+		<h2 class="text-center">Password change successful</h2>
+	<?php } ?>
 	<div class="container">
 	<h2 class="text-center">Account Details</h2>
             <div class="col-md-8 col-md-offset-2" style="float: none; background-color:#eee">
@@ -50,14 +55,47 @@
                     <div class="form-group">
                           <label for="lastname">Last Name:</label>
                           <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $lastName;?>">
-                    </div>	  
-                    <button id="submit" name="submit" type="submit" class="btn btn-primary">Update Details</button>
-
+                    </div>
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#passwordModal">Change Password</button>					
+                    <button id="submit" name="submit" type="submit" class="btn btn-primary">Update Details</button>		
                 </form>
             </div>
+	</div>
+	
+	<!-- Modal -->
+	<div id="passwordModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Change Password</h4>
+				</div>
+				<div class="modal-body">
+					<form action="changePassword.php" method="post">	
+						<div class="form-group">
+							<label for="oldpassword">Old Password:</label>
+							<input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Old Password">
+						</div>
+						<div class="form-group">
+							<label for="newpassword">New Password:</label>
+							<input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="New Password">
+						</div>
+						<div class="form-group">
+						<input type="hidden" value=<?php echo $row['orderNo']; ?> name="orderNo" />
+						</div> 
+						<div class="modal-footer">
+							<button id="submit" name="submit" type="submit" value="Update Estimated-Date" class="btn btn-primary">Submit</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
       <?php
         include "tail.php";
       ?>
+	  
   </body>
 </html>
