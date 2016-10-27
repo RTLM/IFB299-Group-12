@@ -30,7 +30,7 @@
     global $weightError;
     global $weightLabel;
     global $weightLabelColr;
-    $weightLabel = "Weight:";
+    $weightLabel = "Weight:(Kgs)";
     $weightLabelColr = "black";
     $weightError = $_SESSION["invalidWeight"];
     if($weightError){
@@ -48,22 +48,22 @@
 			<div class="col-md-8 col-md-offset-2" style="background-color:white">
 			<center><img src="padlock-closed2.png" style="width: 25px; height:10px;"></center><!-- used as padding for form, needs to be replaced-->
 			</div>
-			<div class="col-md-8 col-md-offset-2" style="background-color:#528ae5">
+			<div class="col-md-8 col-md-offset-2" style="background-color:ghostwhite">
 			<h2 class="text-center">New Order</h2>
 			<!--<center><img src="padlock-closed2.png" style="width: 25px; height:30px;"></center>-->
 			</div>
-				<div class="col-md-8 col-md-offset-2" style="background-color:#a8aeb7">
-					<form method="POST" onsubmit="return validateOrderForm();" action="orderConfirmation.php">
+				<div class="col-md-8 col-md-offset-2" style="background-color:ghostwhite">
+					<form method="POST" action="orderConfirmation.php">
 					<div class="form-group">
-						<label for="destination">Destination:</label>
+						<label for="destination" id="destinationLabel">Destination:</label>
 						<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To" onchange ="doGeocode('destination');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label for="pickup">Pick Up:</label>
+						<label for="pickup" id="pickupLabel">Pick Up:</label>
 						<input type="text" class="form-control" id="pickup" name="pickup" placeholder="Sending From" onchange="doGeocode('pickup');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label id="receiversnameLabel" for="receiversname" style = "color:<?php echo $nameLabelColor; ?>"><?php echo $nameLabel;?></label>
+						<label id="receiversnameLabel" id="receiversnameLabel" for="receiversname" style = "color:<?php echo $nameLabelColor; ?>"><?php echo $nameLabel;?></label>
 						<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name" onkeydown="validate('receiversname','name');" autocomplete="off">
 					</div>
 					<div class="form-group">
