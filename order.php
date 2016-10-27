@@ -7,6 +7,21 @@
     }
     include "head.php";
   ?>
+  
+  <style>
+		body {
+			background-image: url("background.jpg");
+		} 
+		
+		.myBackground {
+		  background-color: rgba(255,255,255, 0.6);
+		  color: inherit;
+		}
+		.rss.opacity {
+			-webkit-filter: opacity(50%); 
+			filter: opacity(50%);
+		}
+		</style>
     <body>
         <?php
             include 'navbar.php';
@@ -17,15 +32,12 @@
             $result = $db->getArrayOfValues($sqlSt);
             $row = $result[0];
         ?>
-			<div class="container">
-			<div class="col-md-8 col-md-offset-2" style="background-color:white">
-			<center><img src="padlock-closed2.png" style="width: 25px; height:10px;"></center><!-- used as padding for form, needs to be replaced-->
-			</div>
-			<div class="col-md-8 col-md-offset-2" style="background-color:#528ae5">
+			<div class="container" style="padding-top: 1cm; ">
+			<div class="col-md-8 col-md-offset-2 myBackground" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" >
 			<h2 class="text-center">New Order</h2>
 			<!--<center><img src="padlock-closed2.png" style="width: 25px; height:30px;"></center>-->
 			</div>
-				<div class="col-md-8 col-md-offset-2" style="background-color:#a8aeb7">
+				<div class="col-md-8 col-md-offset-2 myBackground" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 					<form method="POST" onsubmit="return submitForm2();" action="orderConfirmation.php">
 					<div class="form-group">
 						<label for="destination">Destination:</label>
@@ -73,7 +85,8 @@
 							<option value="TRUE">Yes</option>
 						</select>
 					</div>
-					 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+					<div  style="padding-bottom: 1cm;"></div>
 					</form>
 				</div>
 			</div>
