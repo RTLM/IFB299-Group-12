@@ -176,11 +176,13 @@ function validateName(id){
 	var string = document.getElementById(id).value;
 	var labelId = id+"Label";
 	if(/^[a-z A-Z]+$/.test(string) && string.length < 20){
+		changeProperty(id+"Label","color",true);
 		changeProperty(id,"color",true);
 		return true;
 	}
 	else{
 		changeProperty(id,"color",false);
+		changeProperty(id+"Label","color",false);
 		return false;
 	}
 }
@@ -192,10 +194,12 @@ function validatePassword(id){
 	var string = document.getElementById(id).value;
 	if(/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/.test(string) && string.length > 8){
 		changeProperty(id,"color",true);
+		changeProperty(id+"Label","color",true);
 		return true;
 	}
 	else{
 		changeProperty(id,"color",false);
+		changeProperty(id+"Label","color",false);
 		return false;
 	}
 }
@@ -207,11 +211,13 @@ function validateNumber(id){
 	var preg = /^(0(2|3|4|7|8))?\d{8}$/; 
 	var string = document.getElementById(id).value;
 	if(preg.test(string) && string.length == 10){
+		changeProperty(id+"Label","color",true);
 		changeProperty(id,"color",true);
 		return true;
 	}
 	else{
 		changeProperty(id,"color",false);
+		changeProperty(id+"Label","color",false);
 		return false;
 	}
 }
@@ -223,8 +229,10 @@ function validateIfTrue(id){
 	var desElement = document.getElementById(id);
 	var destination = desElement.value;
 	if(destination == "false"){
+		document.getElementById(id+"Label").style.color = "orangered";
 		return false;
 	}
+	document.getElementById(id+"Label").style.color = "black";
 	return true;
 }
 /*Helper function for validate method. This function will help
@@ -237,14 +245,19 @@ function validateWeight(id){
 	var weight;
 	if(!isNumeric(string)){
 		changeProperty(id,"color",false);
+		changeProperty(id+"Label","color",false);
 		return false;
 	}
 	weight = parseInt(string);
-	if(weight > maxWeight){
+	if(weight > maxWeight || weight <= 0){
 		changeProperty(id,"color",false);
+		document.getElementById(id+"Label").innerHTML = "Weight should be < 22 && > 0";
+		changeProperty(id+"Label","color",false);
 		return false;
 	}
 	changeProperty(id,"color",true);
+	changeProperty(id+"Label","color",true);
+	document.getElementById(id+"Label").innerHTML = "Weight:(Kgs):";
 	return true;
 }
 /*Helper function for validateWeight method. This function will help
@@ -323,12 +336,16 @@ function doGeocode(id){
 	var geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'address': addr.value},function(results, status){
 	    if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+	    	document.getElementById(id+"Label").innerHTML = id;
+	    	changeProperty(id+"Label","color",true);
 	    	changeProperty(id,"color",true);
 	    	changeProperty(id,"value",results[0].formatted_address);
 	    	validateAddresses('destination');
 	    	validateAddresses('pickup');
 	    }
 	    else{
+	    	document.getElementById(id+"Label").innerHTML = "Invalid Location!! Make sure it exists inside brisbane area.."
+	    	changeProperty(id+"Label","color",false);
 	    	changeProperty(id,"color",false);
 	    	validateAddresses('destination');
 	    	validateAddresses('pickup');
@@ -344,7 +361,9 @@ NOT GENERIC
 function optionValidator(id){
 	var element = document.getElementById(id);
 	if(element.value == ""){
+		document.getElementById(id+"Label").style.color = "orangered";
 		return false;
 	}
+	document.getElementById(id+"Label").style.color = "black";
 	return true;
 }
