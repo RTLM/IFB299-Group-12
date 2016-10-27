@@ -26,6 +26,10 @@ $owner = array(
   'drivers'  => array('text'=>'Drivers',  'url'=>'/drivers.php'),
 );
 
+/*This function returns a value for panel headings based on the status 
+* estimated delivery date of the package
+@author: Joshua Russell-Ahern
+*/
 function statusOfDeliveryForDriver($deliveryDate){
     $now = date_create();
     $interval = date_diff($now, $deliveryDate);
@@ -60,6 +64,10 @@ function alertUser($variable,$stringToDisplay){
     }   
 }
 
+/* This function dynamically creates the navbar based on the user type
+* User type arrays stored at the top of the document
+@author: Joshua Russell-Ahern
+*/
 function updateNav($account) {
 	global $customer, $driver, $owner, $guest;
 	switch ($account) {
@@ -83,6 +91,9 @@ function updateNav($account) {
 	return $html;
 }
 
+/* This function returns package priority as a string
+@author: Joshua Russell-Ahern
+*/
 function priority($priority) {
 	switch ($priority) {
 		case 1:
@@ -98,6 +109,10 @@ function priority($priority) {
 	return $string;
 }
 
+/* This function calculates and returns the cost of a package
+* Price is based off priority, size and weight
+@author: Joshua Russell-Ahern
+*/
 function packageCost($priority, $size, $weight) {
 	$cost = 0;
 	switch ($priority) {
