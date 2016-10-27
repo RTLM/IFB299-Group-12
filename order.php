@@ -17,10 +17,6 @@
 		  background-color: rgba(255,255,255, 0.6);
 		  color: inherit;
 		}
-		.rss.opacity {
-			-webkit-filter: opacity(50%); 
-			filter: opacity(50%);
-		}
 		</style>
     <body>
         <?php
@@ -32,12 +28,12 @@
             $result = $db->getArrayOfValues($sqlSt);
             $row = $result[0];
         ?>
-			<div class="container" style="padding-top: 1cm; ">
-			<div class="col-md-8 col-md-offset-2 myBackground" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" >
+			<div class="container" style="padding-top: 1cm;">
+			<div class="col-md-8 col-md-offset-2 myBackground" style="border-top-left-radius: 10px; border-top-right-radius: 10px; " >
 			<h2 class="text-center">New Order</h2>
 			<!--<center><img src="padlock-closed2.png" style="width: 25px; height:30px;"></center>-->
 			</div>
-				<div class="col-md-8 col-md-offset-2 myBackground" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+				<div class="col-md-8 col-md-offset-2 myBackground" style=" margin-bottom: 1cm; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding-bottom: 1cm;">
 					<form method="POST" onsubmit="return submitForm2();" action="orderConfirmation.php">
 					<div class="form-group">
 						<label for="destination">Destination:</label>
@@ -86,7 +82,6 @@
 						</select>
 					</div>
 					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-					<div  style="padding-bottom: 1cm;"></div>
 					</form>
 				</div>
 			</div>
