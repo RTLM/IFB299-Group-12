@@ -1,19 +1,36 @@
 <?php
     session_start();
-
-    $email = $_SESSION["emaiId"];
+    include "database.php";
+    $email = $_SESSION["emailId"];
     $accountNo = $_SESSION["accountNo"];
     $receiversContact = htmlspecialchars($_POST['receiverscontact']);
     $destination = htmlspecialchars($_POST['destination']);
     $receiversName = htmlspecialchars($_POST['receiversname']);
     $pickup = htmlspecialchars($_POST['pickup']);
-	$priority = htmlspecialchars($_POST['priority']);
-	$valuable = htmlspecialchars($_POST['valuable']);
+	  $priority = htmlspecialchars($_POST['priority']);
+	  $valuable = htmlspecialchars($_POST['valuable']);
     $status = "Pending";
     $date = date("Y-m-d");
+    $error = false;
     $id = $_SESSION['accountNo'];
+    $db = new database;
+    if($db->invalidate($receiversName,"name")){
+      $_SESSION["invalidName"] = true;
+      $error = true;
+    }
+    if($db->invalidate($receiversContact,"number")){
+      $_SESSION["invalidContact"] = true;
+      $error = true;
+    }
+    if(intval(htmlspecialchars($_POST["weight"])) > 22 || intval(htmlspecialchars($_POST["weight"])) <=0){
+      $_SESSION["invalidWeight"] = true;
+      $error = true;
+    }
+    if($error){
+      header("Location:order.php");
+    }
 	$prioritydate = date_create($date);
-	switch ($_POST['priority']) {
+	switch (htmlspecialchars($_POST['priority'])) {
 		case 1:
 			date_add($prioritydate, date_interval_create_from_date_string('1 weekdays'));
 			break;
@@ -71,7 +88,7 @@
                   </div>
 				  <div class="form-group">
                         <label for="size">Package Size:</label>
-                        <p class="form-control-static"><?php echo ucfirst($_POST['size']); ?></p>
+                        <p class="form-control-static"><?php echo $_POST['size']; ?></p>
                   </div>				  
                   <div class="form-group">
                         <label for="priority">Package Priority:</label>
@@ -102,7 +119,7 @@
 							}
 						?></p>
                   </div>
-				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo number_format(packageCost($_POST['priority'], $_POST['size'], $_POST['weight']), 2); ?></h2>				  
+				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo packageCost($_POST['priority'], $_POST['size'], $_POST['weight']); ?></h2>				  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                   <a href="order.php" class="btn btn-primary" role="button">Add Order</a>
                   <a href="cancelOrder.php" class="btn btn-danger" role="button">Cancel</a>
