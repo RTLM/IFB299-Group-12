@@ -16,6 +16,26 @@ function submitForm(formId, item, columm){
 	document.getElementById(columm+formId).value = ""+item;
 	document.getElementById("form"+formId).submit();
 }
+
+/*This function will assign a driver and mark a package as
+no longer pending. Setting a timestamp for when this occurs
+as well
+Modification of submitForm function
+@param:formId-> ID of form to submit.
+@param:status-> Status of Package.
+@param:orderNo-> Order Number of Package.
+@author: Joshua Russell-Ahern
+*/
+function assignDriver(formId, item, orderNo){
+	document.getElementById("driver"+formId).value = ""+item;
+	document.getElementById("form"+formId).submit();
+	$.ajax({
+		method: "GET",
+        url: "updateTimestamp.php",          
+        data: { status: "Ready For Pickup", orderNo: orderNo}
+    }); 
+}
+
 /*This function is specfically designed for order.php
 @author: Navjot singh Dhaliwal
 */

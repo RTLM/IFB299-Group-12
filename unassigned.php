@@ -67,8 +67,8 @@
 															<span class="caret"></span>
 														</button>
 														<ul class="btn-space dropdown-menu">
-															<li><a onclick="submitForm(<?php echo $formId; ?>,'1', 'driver')">Driver 1</a></li>
-															<li><a onclick="submitForm(<?php echo $formId; ?>,'2', 'driver')">Driver 2</a></li>
+															<li><a onclick="assignDriver(<?php echo $formId; ?>,'1', <?php echo $row['orderNo']; ?>)">Driver 1</a></li>
+															<li><a onclick="assignDriver(<?php echo $formId; ?>,'2', <?php echo $row['orderNo']; ?>)">Driver 2</a></li>
 														</ul>
 														<input id = <?php echo '"driver'."$formId".'"'; ?> type="hidden" value="RFP" name = "driver">
 														<input type = "hidden" value = <?php echo '"'.$row["orderNo"].'"';?> name = "orderNo">
