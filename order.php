@@ -3,7 +3,7 @@
   <?php
     session_start();
     if($_SESSION["login"] !=true){
-        header("Location:signIn.php");
+        header("Location:signin.php");
     }
     include "head.php";
   ?>
