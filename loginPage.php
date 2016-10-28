@@ -1,4 +1,7 @@
 <?php
+/*This file checks the credentials of users and login the user
+    @author: Navjot Singh Dhaliwal
+*/
 session_start();
 include 'database.php';
     $db = new database;

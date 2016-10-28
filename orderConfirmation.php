@@ -1,4 +1,7 @@
 <?php
+  /*This code contains the validations for user Input. It will validate the user input
+  @author: Navjot Singh Dhaliwal
+  */
     session_start();
     include "database.php";
     $email = $_SESSION["emailId"];
@@ -84,27 +87,27 @@
                   </div>
                   <div class="form-group">
                         <label for="destination">Destination:</label>
-                        <p class="form-control-static"><?php echo $_POST['destination']; ?></p>
+                        <p class="form-control-static"><?php echo $destination; ?></p>
                   </div>
                   <div class="form-group">
                         <label for="pickup">Pick Up:</label>
-                        <p class="form-control-static"><?php echo $_POST['pickup']; ?></p>
+                        <p class="form-control-static"><?php echo $pickup; ?></p>
                   </div>
                   <div class="form-group">
                         <label for="receiversname">Receiver's Name:</label>
-                        <p class="form-control-static"><?php echo $_POST['receiversname']; ?></p>
+                        <p class="form-control-static"><?php echo $receiversName; ?></p>
                   </div>
                   <div class="form-group">
                         <label for="receiverscontact">Receiver's Contact Number:</label>
-                        <p class="form-control-static"><?php echo $_POST['receiverscontact']; ?></p>
+                        <p class="form-control-static"><?php echo $receiversContact; ?></p>
                   </div>
 				  <div class="form-group">
                         <label for="weight">Package Weight:</label>
-                        <p class="form-control-static"><?php echo $_POST['weight'] . ' Kgs'; ?></p>
+                        <p class="form-control-static"><?php echo $weight . ' Kgs'; ?></p>
                   </div>
 				  <div class="form-group">
                         <label for="size">Package Size:</label>
-                        <p class="form-control-static"><?php echo $_POST['size']; ?></p>
+                        <p class="form-control-static"><?php echo $size; ?></p>
                   </div>				  
                   <div class="form-group">
                         <label for="priority">Package Priority:</label>
@@ -135,7 +138,7 @@
 							}
 						?></p>
                   </div>
-				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo packageCost($_POST['priority'], $_POST['size'], $_POST['weight']); ?></h2>				  
+				  <h2 class="text-center">The Price of Your Order Comes to: $<?php echo packageCost($priority,$size,$weight); ?></h2>				  
                   <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                   <a href="order.php" class="btn btn-primary" role="button">Add Order</a>
                   <a href="cancelOrder.php" class="btn btn-danger" role="button">Cancel</a>

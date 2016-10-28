@@ -1,4 +1,8 @@
 <?php
+  /*This file is self submitting file. It helps user to register with on the spot.
+    PHP code helps to validate the inputs.
+    @author: Navjot Singh Dhaliwal
+  */
   session_start();
   global $emailError;
   global $emailLabel;

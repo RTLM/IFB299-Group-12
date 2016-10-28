@@ -1,4 +1,9 @@
 <?php
+/*This API is created to connect to database. It also consists other functions to validate
+and sanitize the user input.
+Note: The functions that are not my work are refrenced to their authors
+@author: Navjot Singh Dhaliwal
+*/
 class database{
     private $conn;
     /*This function will connect us to database for future updates to datbase.*/
@@ -37,7 +42,9 @@ class database{
             return $e;
         }
     }
-    /*This fucntion will update customers table*/
+    /*This fucntion will update customers table
+    @author: Josh
+    */
     function makeAccount($emailId,$address,$contactNumber,$firstName,$lastName,$password,$accountType){
         if($this->checkIfEmailIdUsed($emailId)){
             return false;
