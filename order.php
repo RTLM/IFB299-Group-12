@@ -5,10 +5,54 @@
     if($_SESSION["login"] !=true){
         header("Location:signin.php");
     }
+    global $nameError;
+    global $nameLabel;
+    global $nameLabelColor;
+    $nameLabelColor = "Black";
+    $nameLabel = "Name:";
+    $nameError = $_SESSION["invalidName"];
+    if($nameError){
+    	$nameLabel="Invalid Name";
+    	$nameLabelColor = red;
+    	unset($_SESSION["invalidName"]);
+    }
+    global $contactError;
+    global $contactLabel;
+    global $contactLabelColor;
+    $contactLabel = "Receivers Contact:";
+    $contactLabelColor = "Black";
+    $contactError = $_SESSION["invalidContact"];
+    if($contactError){
+    	$contactLabel = "Invalid Contact";
+    	$contactLabelColor = "red";
+    	unset($_SESSION["invalidContact"]);
+    }
+    global $weightError;
+    global $weightLabel;
+    global $weightLabelColr;
+    $weightLabel = "Weight:(Kgs)";
+    $weightLabelColr = "black";
+    $weightError = $_SESSION["invalidWeight"];
+    if($weightError){
+    	$weightLabel = "Weight must be < 22 & > 0";
+    	$weightLabelColr = "red";
+    	unset($_SESSION["invalidWeight"]);
+    }
+
+    global $destinationError;
+    global $destinationLabel;
+    global $destinationLabelColor;
+    $destinationLabel = "Destination:";
+    $destinationLabelColor = "black";
+    $destinationError = $_SESSION["invalidDestination"];
+    if($destinationError){
+    	$destinationLabel = "Invalid Destination!!!";
+    	$destinationLabelColor = "red";
+    	unset($_SESSION["invalidDestination"]);
+    }
     include "head.php";
   ?>
-  
-  <style>
+    <style>
 		body {
 			background-image: url("background.jpg");
 		} 
@@ -17,8 +61,8 @@
 		  background-color: rgba(255,255,255, 0.6);
 		  color: inherit;
 		}
-		</style>
-    <body>
+	</style>
+    <body onload="prepareOrder();">
         <?php
             include 'navbar.php';
             include 'database.php';
@@ -34,36 +78,36 @@
 			<!--<center><img src="padlock-closed2.png" style="width: 25px; height:30px;"></center>-->
 			</div>
 				<div class="col-md-8 col-md-offset-2 myBackground" style=" margin-bottom: 1cm; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding-bottom: 1cm;">
-					<form method="POST" onsubmit="return submitForm2();" action="orderConfirmation.php">
+					<form method="POST" action="orderConfirmation.php">
 					<div class="form-group">
-						<label for="destination">Destination:</label>
+						<label for="destination" id="destinationLabel" style = "color:<?php echo $destinationLabelColor; ?>"><?php echo $destinationLabel;?></label>
 						<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To" onchange ="doGeocode('destination');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label for="pickup">Pick Up:</label>
-						<input type="text" class="form-control" id="pickup" name="pickup" value="<?php echo $row['address']?>" onchange="doGeocode('pickup');">
+						<label for="pickup" id="pickupLabel">Pick Up:</label>
+						<input type="text" class="form-control" id="pickup" name="pickup" value="<?php echo $row['address']?>" placeholder="Sending From" onchange="doGeocode('pickup');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label for="receiversname">Receiver's Name:</label>
-						<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name" onkeydown="validate('receiversname','name')">
+						<label id="receiversnameLabel" id="receiversnameLabel" for="receiversname" style = "color:<?php echo $nameLabelColor; ?>"><?php echo $nameLabel;?></label>
+						<input type="text" class="form-control" id="receiversname" name="receiversname" placeholder="Receiver's Name" onkeydown="validate('receiversname','name');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label for="receiverscontact">Receiver's Contact Number:</label>
-						<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number" onkeydown="validate('receiverscontact','number');">
+						<label id = "receiverscontactLabel" for="receiverscontact" style = "color:<?php echo $contactLabelColor; ?>"><?php echo $contactLabel;?></label>
+						<input type="tel" class="form-control" id="receiverscontact" name="receiverscontact" placeholder="Receiver's Contact Number" onkeydown="validate('receiverscontact','number');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label for="weight">Package Weight (Kgs):</label>
-						<input type="text" class="form-control" id="weight" name="weight" placeholder="Package Weight in Kilograms" onkeydown="validate('weight','weight');">
+						<label id = "weightLabel" for="weight" style = "color:<?php echo $weightLabelColr; ?>"><?php echo $weightLabel;?></label>
+						<input type="text" class="form-control" id="weight" name="weight" placeholder="Package Weight in Kilograms" onkeydown="validate('weight','weight');" autocomplete="off">
 					</div>	
 					<div class="form-group">
-						<label for="size">Package Size:</label>
+						<label id = "sizeLabel" for="size">Package Size:</label>
 						<select class="form-control" id="size" name="size">
 							<option hidden value="" selected disabled>Select a Size</option>
-							<option value="envelope">Envelope (Up to 22cm x 33.5cm)</option>
-							<option value="small">Small (Up to 20cm&#179;)</option>
-							<option value="medium">Medium (Up to 35cm&#179;)</option>
-							<option value="large">Large (Up to 45cm&#179;)</option>
-							<option value="x-large">X-Large (Up to 70cm&#179;)</option>
+							<option value="Envelope">Envelope (Up to 22cm x 33.5cm)</option>
+							<option value="Small">Small (Up to 20cm&#179;)</option>
+							<option value="Medium">Medium (Up to 35cm&#179;)</option>
+							<option value="Large">Large (Up to 45cm&#179;)</option>
+							<option value="X-Large">X-Large (Up to 70cm&#179;)</option>
 						</select>
 					</div>									
 					<div class="form-group">
@@ -81,7 +125,9 @@
 							<option value="TRUE">Yes</option>
 						</select>
 					</div>
-					<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+					<div id = "addressDiv" style="display: none;">
+					</div>
+					 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
 			</div>
