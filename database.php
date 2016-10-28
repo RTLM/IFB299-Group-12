@@ -87,4 +87,36 @@ class database{
         }
         return false;
     }
+    function invalidate($string,$type){
+        $patternPassword = '/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/';
+        $patternNumber = "/^(0(2|3|4|7|8))?\d{8}$/";
+        switch($type){
+            case "password":{
+                if(!preg_match($patternPassword, $string) && strlen($string)<8){
+                    return true;
+                }
+                return false;
+            }
+            case "email":{
+                if(!filter_var($string, FILTER_VALIDATE_EMAIL)){
+                return true;
+                }
+                else{
+                return false;
+                }
+            }
+            case "name":{
+                if(ctype_alpha($string)){
+                    return false;
+                }
+                return true;
+            }
+            case "number":{
+                if(preg_match($patternNumber,$string)){
+                    return false;
+                }
+                return true;
+            }
+        }//end switch
+    }//end function 
 }
