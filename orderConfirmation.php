@@ -26,15 +26,22 @@
       $_SESSION["invalidWeight"] = true;
       $error = true;
     }
-    if(strlen($destination) < 5){
+    if($db->geocode($destination) == false){
       $_SESSION["invalidDestination"] = true;
       $error = true;
     }
-    if(strlen($pickup)<5){
+    else if($db->checkIfAddressIsInBrisbane($destination) == false){
+      $_SESSION["destinationOutsideBrisbane"] = true;
+      $error = true;
+    }
+    if($db->geocode($pickup) == false){
       $_SESSION["invalidPickup"] = true;
       $error = true;
     }
-
+    else if($db->checkIfAddressIsInBrisbane($pickup) == false){
+      $_SESSION["pickupOutsideBrisbane"] = true;
+      $error = true;
+    }
     if($error){
       header("Location:order.php");
     }

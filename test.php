@@ -4,6 +4,7 @@
  * For this test suite to work you need phpUnit version 4.8.27 and 
  * PHP version 5.3.28. If you use any other versions for PHP or 
  * phpUnit serious errors may occur.
+ * Note:To run this file simply type phpunit test.php
  * @author:Navjot Singh Dhaliwal
  */
 class test extends PHPunit_Framework_Testcase {
@@ -87,5 +88,15 @@ class test extends PHPunit_Framework_Testcase {
     public function testCheckInputsIfEmpty(){
         $db = new database;
         $this->assertTrue($db->checkInputsIfEmpty(""));
+    }
+	public function testGeocodeFunction(){
+		$db = new database;
+		$address = $db->geocode("1, 2571 W Eau Gallie Blvd, Melbourne, FL 32935, USA");
+		$this->assertTrue($address !=false);
+	}
+    public function testDistanceFindingFunction(){
+        $db = new database;
+        $address = $db->checkIfAddressIsInBrisbane("100 Nectarine St, Runcorn QLD 4113, Australia");
+        $this->assertTrue($address);
     }
 }

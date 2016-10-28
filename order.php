@@ -40,15 +40,41 @@
     }
 
     global $destinationError;
+    global $destinationOutsideBrisbane;
     global $destinationLabel;
     global $destinationLabelColor;
     $destinationLabel = "Destination:";
     $destinationLabelColor = "black";
     $destinationError = $_SESSION["invalidDestination"];
+    $destinationOutsideBrisbane = $_SESSION["destinationOutsideBrisbane"];
     if($destinationError){
     	$destinationLabel = "Invalid Destination!!!";
     	$destinationLabelColor = "red";
     	unset($_SESSION["invalidDestination"]);
+    }
+    else if($destinationOutsideBrisbane){
+    	$destinationLabel = "Destination must be in Brisbane!!!";
+    	$destinationLabelColor = "red";
+    	unset($_SESSION["destinationOutsideBrisbane"]);
+    }
+
+    global $pickupError;
+    global $pickupOutsideBrisbane;
+    global $pickupLabel;
+    global $pickupLabelColor;
+    $pickupLabel = "Pickup:";
+    $pickupLabelColor = "black";
+    $pickupError = $_SESSION["invalidPickup"];
+    $pickupOutsideBrisbane = $_SESSION["pickupOutsideBrisbane"];
+    if($pickupError){
+    	$pickupLabel = "Invalid Pickup!!!";
+    	$pickupLabelColor = "red";
+    	unset($_SESSION["invalidPickup"]);
+    }
+    else if($pickupOutsideBrisbane){
+    	$pickupLabel = "Pickup must be in Brisbane!!!";
+    	$pickupLabelColor = "red";
+    	unset($_SESSION["pickupOutsideBrisbane"]);
     }
     include "head.php";
   ?>
@@ -84,7 +110,7 @@
 						<input type="text" class="form-control" id="destination" name="destination" placeholder="Sending To" onchange ="doGeocode('destination');" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<label for="pickup" id="pickupLabel">Pick Up:</label>
+						<label for="pickup" id="pickupLabel" style = "color:<?php echo $pickupLabelColor; ?>"><?php echo $pickupLabel;?></label>
 						<input type="text" class="form-control" id="pickup" name="pickup" value="<?php echo $row['address']?>" placeholder="Sending From" onchange="doGeocode('pickup');" autocomplete="off">
 					</div>
 					<div class="form-group">

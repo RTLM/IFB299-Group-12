@@ -31,6 +31,14 @@
   $contactLabel = "Contact:";
   $contactLabelColor = "Black";
 
+  global $addressError;
+  global $addressLabel;
+  global $addressLabelColor;
+  $addressLabel = "Address:";
+  $addressLabelColor = "Black";
+
+
+
   if($_SESSION["login"] == true){
       header("Location:index.php");
       exit;
@@ -47,7 +55,7 @@
       $db = new database;
       $db->connectToDatabase();
       if($db->checkIfEmailIdUsed($emailId) == false && $db->invalidate($emailId,"email") == false){
-        if($db->invalidate($password,"password") == false && $db->invalidate($firstName,"name") == false && $db->invalidate($lastName,"name") == false && $db->invalidate($contact,"number") == false){
+        if($db->invalidate($password,"password") == false && $db->invalidate($firstName,"name") == false && $db->invalidate($lastName,"name") == false && $db->invalidate($contact,"number") == false && $db->geocode($address) != false){
 
           if($db->makeAccount($emailId, $address, $contactNumber, $firstName, $lastName, $password, $accountType) ==false)
           {
@@ -86,6 +94,11 @@
             $contactError = true;
             $contactLabelColor = "red";
           }
+          if($db->geocode($addres) == false){
+            $addressLabel = "Provide valid Address:";
+            $addressError = true;
+            $addressLabelColor = "red";
+          }
         }    
       }
       else{
@@ -123,11 +136,11 @@
                           <input type="password" class="form-control" id="password" name="password" placeholder="Password" onkeydown="validate('password','password',false);">
                     </div>
                     <div class="form-group">
-                          <label for="contact"style = "color:<?php echo $contactLabelColor; ?>"><?php echo $contactLabel;?></label>
+                          <label for="contact" style = "color:<?php echo $contactLabelColor; ?>"><?php echo $contactLabel;?></label>
                           <input <?php if($error){echo"value='$contact'";}?>type="tel" class="form-control" id="contact" name="contact" placeholder="Contact Phone Number" onkeydown="validate('contact','number',false);" autocomplete = "off" value = <?php echo $contact; ?>>
                     </div>
                     <div class="form-group">
-                          <label for="address">Address:</label>
+                          <label for="address" style = "color:<?php echo $addressLabelColor; ?>"><?php echo $addressLabel;?></label>
                           <input <?php if($error){echo"value='$address'";}?>type="text" class="form-control" id="address" name="address" placeholder="Home/Work Address" onchange="doGeocode('address');validateAddresses('address');" autocomplete="off" value = <?php echo $address; ?>>
                     </div>
                     <div class="form-group">
