@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
+  	/*This code will check if there is any error throw by orderConfirmation.php
+		and will take action accordingly.
+		@author: Navjot Singh Dhaliwal
+  	*/
     session_start();
     if($_SESSION["login"] !=true){
         header("Location:signin.php");
@@ -128,12 +132,11 @@
 					<div class="form-group">
 						<label id = "sizeLabel" for="size">Package Size:</label>
 						<select class="form-control" id="size" name="size">
-							<option hidden value="" selected disabled>Select a Size</option>
-							<option value="Envelope">Envelope (Up to 22cm x 33.5cm)</option>
-							<option value="Small">Small (Up to 20cm&#179;)</option>
-							<option value="Medium">Medium (Up to 35cm&#179;)</option>
-							<option value="Large">Large (Up to 45cm&#179;)</option>
-							<option value="X-Large">X-Large (Up to 70cm&#179;)</option>
+							<option value="envelope" selected>Envelope (Up to 22cm x 33.5cm)</option>
+							<option value="small">Small (Up to 20cm&#179;)</option>
+							<option value="medium">Medium (Up to 35cm&#179;)</option>
+							<option value="large">Large (Up to 45cm&#179;)</option>
+							<option value="x-Large">X-Large (Up to 70cm&#179;)</option>
 						</select>
 					</div>									
 					<div class="form-group">
