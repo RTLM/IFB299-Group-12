@@ -1,0 +1,53 @@
+Release 1
+
+Initial Planning/User Stories 
+
+During the early weeks of the project I had written up possible features (just ideas) that would need to be included in the project which were able to be expanded into user stories. At the end, this came to around 23 which is approximately 50% of the final amount of user stories. However, there were several added towards the end for additional features. This included the acceptance criteria. Please do note however that as a group, it was decided that we would all think ideas for features and then come back and combine all stories together to make one integrated list for the final User Stories. Therefore, several of us did have similar user stories/features which did overlap. 
+
+(Link: https://docs.google.com/presentation/d/1aOTO1ugSnvb3E70_U6BENILXhROti-DbI4T4w-ZNnKk/edit#slide=id.g1638e26ac8_2_75)
+
+Design layout
+
+I had created a possible design layout for the website prior to it being created. This shows both the design on powerpoint for the "aesthetic look" and on wireframe for a more precise look.
+
+(File: Design slides.pptx)
+
+Peer Review 1 
+
+Assisted with the proof reading of the peer review and also wrote it up so that the sentence structure was more formal. I had also contributed to some of the content 
+
+Bug Testing 1
+
+I had done several bug tests through out the project. Release 1 included 3 repeats for the bug tests after major updates. Bugs listed under "Release 1" Heading
+
+(Link: https://docs.google.com/document/d/17bJcEe3caUjn5vvIsVChvgI8FaHJezBjajD-0YT7Re4/edit)
+
+Acceptance Criteria Testing 1
+
+While going through the bug testing, I also completed off any Acceptance criteria which were met. Listed under Release 1 (Mainly sprint 2) under each specific Story heading for convenience.
+
+(Link: https://docs.google.com/document/d/1x-KBe5mmEeO6q3wPT4H_IDOCPhFU4jZsPCUdKtTbpKI/edit#)
+
+Release 2
+
+Bug Testing 1
+
+I had done several bug tests through out the project. Release 1 included 3 repeats for the bug tests after major updates. Bugs listed under "Release 2" Heading
+
+(Link: https://docs.google.com/document/d/17bJcEe3caUjn5vvIsVChvgI8FaHJezBjajD-0YT7Re4/edit)
+
+Acceptance Criteria Testing 1
+
+While going through the bug testing, I also completed off any Acceptance criteria which were met. Listed under Release 2 under each specific Story heading for convenience.
+
+(Link: https://docs.google.com/document/d/1x-KBe5mmEeO6q3wPT4H_IDOCPhFU4jZsPCUdKtTbpKI/edit#)
+
+User "Demos"
+
+Once we were nearing the conclusion of the final product and all the user stories had been established and working, I organised a small group of 3 people to trial the website to get user feedback. Using this, a few changes were made to the final product and also included an addition feature which was not previously discussed but we agreed was a core inclusion - Price Calculator. Details listed under "User Feedback" heading.
+
+(Link: https://docs.google.com/document/d/17bJcEe3caUjn5vvIsVChvgI8FaHJezBjajD-0YT7Re4/edit)
+
+Peer Review 2 
+
+Assisted with final proof reading of review prior to submission. Also made minor changes and minor additions.
